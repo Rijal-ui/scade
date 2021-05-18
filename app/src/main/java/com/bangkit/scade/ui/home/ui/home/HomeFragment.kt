@@ -1,5 +1,7 @@
 package com.bangkit.scade.ui.home.ui.home
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +11,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bangkit.scade.databinding.FragmentHomeBinding
+import com.bangkit.scade.ui.hospital.splash.HospitalSplashActivity
+import com.bangkit.scade.ui.skin_check.CheckSkinActivity
+import com.bangkit.scade.ui.skin_check.splash.CheckSplashActivity
 
 class HomeFragment : Fragment() {
 
@@ -19,16 +24,22 @@ class HomeFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         homeViewModel =
             ViewModelProvider(this).get(HomeViewModel::class.java)
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
+        binding.btnImgSkin.setOnClickListener{
+            val intent = Intent(activity, CheckSplashActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.btnImgHospital.setOnClickListener {
+            val intent = Intent(activity, HospitalSplashActivity::class.java)
+            startActivity(intent)
+        }
 
         val textView: TextView = binding.textHome
         homeViewModel.text.observe(viewLifecycleOwner, Observer {

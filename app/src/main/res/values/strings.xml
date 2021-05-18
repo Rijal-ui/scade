@@ -2,6 +2,21 @@
     <string name="app_name">scade</string>
     <string name="title_activity_home">MainActivity</string>
     <string name="title_home">SCADE</string>
-    <string name="title_dashboard">Dashboard</string>
+    <string name="title_information">Information</string>
     <string name="title_history">History</string>
+
+    <string name="splash_check_1">CHECK SKIN</string>
+    <string name="splash_check_2">Get the result with only ONE picture</string>
+    <string name="start">START NOW</string>
+    <string name="spot_location">Spot Location</string>
+    <string name="example">Lengan Kanan</string>
+    <string name="result">Result</string>
+    <string name="show_result">SHOW RESULT</string>
+
+    <string name="splash_hospital_1">FIND A HOSPITAL</string>
+    <string name="splash_hospital_2">Know nearest hospital from your location</string>
+    <string name="find_hospital">Find a Hospital</string>
+    <string name="title">Title</string>
+    <string name="title_hospital">Hospital Title</string>
+    <string name="location_hospital">Hospital Location</string>
 </resources>

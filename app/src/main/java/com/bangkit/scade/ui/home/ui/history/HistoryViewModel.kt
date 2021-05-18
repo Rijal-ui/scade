@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 class HistoryViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is notifications Fragment"
+        value = "Your Last Ceck Up"
     }
     val text: LiveData<String> = _text
 }
