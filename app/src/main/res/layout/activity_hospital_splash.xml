@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:textColor="@color/black"
         android:text="@string/splash_hospital_2"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintTop_toBottomOf="@id/tv_splash"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
@@ -34,7 +34,7 @@
         android:id="@+id/btn_hospital_start"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
+        android:layout_margin="16dp"
         android:visibility="invisible"
         android:text="@string/start"
         app:layout_constraintBottom_toBottomOf="parent"

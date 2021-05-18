@@ -30,10 +30,7 @@ class InformationFragment : Fragment() {
         _binding = FragmentInformationBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textDashboard
-        informationViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
+
         return root
     }
 

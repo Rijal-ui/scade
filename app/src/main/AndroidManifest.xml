@@ -9,14 +9,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Scade">
-        <activity android:name="com.bangkit.scade.ui.hospital.HospitalActivity"
-            android:parentActivityName=".ui.home.HomeActivity"/>
-        <activity android:name="com.bangkit.scade.ui.hospital.splash.HospitalSplashActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
-        <activity android:name="com.bangkit.scade.ui.skin_check.CheckSkinActivity"
-            android:parentActivityName=".ui.home.HomeActivity"/>
+        <activity android:name=".ui.detailinformation.DetailInformationActivity"></activity>
         <activity
-            android:name="com.bangkit.scade.ui.skin_check.splash.CheckSplashActivity"
+            android:name=".ui.hospital.HospitalActivity"
+            android:parentActivityName=".ui.home.HomeActivity" />
+        <activity
+            android:name=".ui.hospital.splash.HospitalSplashActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".ui.skin_check.CheckSkinActivity"
+            android:parentActivityName=".ui.home.HomeActivity" />
+        <activity
+            android:name=".ui.skin_check.splash.CheckSplashActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".ui.home.HomeActivity"

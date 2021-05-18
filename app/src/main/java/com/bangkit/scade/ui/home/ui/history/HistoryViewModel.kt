@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 class HistoryViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "Your Last Ceck Up"
+        value = "Your Last Check Up"
     }
     val text: LiveData<String> = _text
 }
