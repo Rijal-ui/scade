@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.bangkit.scade.data.source.Repository
 import com.bangkit.scade.di.Injection
 import com.bangkit.scade.ui.home.ui.home.HomeViewModel
+import com.bangkit.scade.ui.skin_check.CheckSkinViewModel
 
 class ViewModelFactory private constructor(private val repository: Repository) :
     ViewModelProvider.NewInstanceFactory() {
@@ -25,6 +26,9 @@ class ViewModelFactory private constructor(private val repository: Repository) :
         return when {
             modelClass.isAssignableFrom(HomeViewModel::class.java) -> {
                 HomeViewModel() as T
+            }
+            modelClass.isAssignableFrom(CheckSkinViewModel::class.java) -> {
+                CheckSkinViewModel(repository) as T
             }
             else ->throw Throwable("Unknown ViewModel class: " + modelClass.name)
         }

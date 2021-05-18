@@ -19,6 +19,10 @@ class HospitalSplashActivity : AppCompatActivity() {
         binding = ActivityHospitalSplashBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        if (supportActionBar != null) {
+            supportActionBar?.hide();
+        }
+
         handler = Handler(mainLooper)
         handler.postDelayed(
             {
