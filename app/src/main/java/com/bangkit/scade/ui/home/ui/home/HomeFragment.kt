@@ -31,18 +31,18 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+
+        return root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         binding.btnImgSkin.setOnClickListener{
             val intent = Intent(activity, CheckSplashActivity::class.java)
             startActivity(intent)
         }
 
-        binding.btnImgHospital.setOnClickListener {
-            val intent = Intent(activity, HospitalSplashActivity::class.java)
-            startActivity(intent)
-        }
-
-
-        return root
     }
 
     override fun onDestroyView() {

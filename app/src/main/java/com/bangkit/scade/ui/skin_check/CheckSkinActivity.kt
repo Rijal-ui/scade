@@ -10,6 +10,7 @@ import android.provider.MediaStore
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.NavUtils
 import androidx.core.content.FileProvider
 import androidx.lifecycle.ViewModelProvider
 import com.bangkit.scade.R
@@ -70,6 +71,7 @@ class CheckSkinActivity : AppCompatActivity() {
                 if (file.exists()) {
                     binding.progressBar.visibility = View.VISIBLE
                     viewModel.checkSkinCancer(file)
+
                 } else {
                     Toast.makeText(
                         this,
@@ -142,6 +144,11 @@ class CheckSkinActivity : AppCompatActivity() {
         ) {
         }
 
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        NavUtils.navigateUpFromSameTask(this)
     }
 
     companion object {

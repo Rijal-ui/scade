@@ -7,29 +7,30 @@
     android:layout_weight="1"
     tools:context=".ui.home.ui.home.HomeFragment">
 
+    <ImageView
+        android:id="@+id/img_scade"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:src="@drawable/res_main_splash"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
     <ImageButton
         android:id="@+id/btn_img_skin"
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:src="@drawable/ic_baseline_add_photo_alternate_24"
-        app:layout_constraintBottom_toTopOf="@+id/btn_img_hospital"
+        android:background="@drawable/round_corner"
+        android:padding="20dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/res_check_your_skin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/img_scade"
         app:layout_constraintVertical_chainStyle="packed"
         tools:ignore="ContentDescription" />
 
-    <ImageButton
-        android:id="@+id/btn_img_hospital"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_marginTop="16dp"
-        android:src="@drawable/ic_baseline_add_photo_alternate_24"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_img_skin"
-        tools:ignore="ContentDescription" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

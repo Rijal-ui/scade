@@ -4,10 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.bangkit.scade.R
 import com.bangkit.scade.databinding.FragmentHistoryBinding
 
 class HistoryFragment : Fragment() {
@@ -23,18 +22,19 @@ class HistoryFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         historyViewModel =
             ViewModelProvider(this).get(HistoryViewModel::class.java)
 
         _binding = FragmentHistoryBinding.inflate(inflater, container, false)
-        val root: View = binding.root
 
-        val textView: TextView = binding.textHistory
-        historyViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
-        return root
+
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.textHistory.text = resources.getString(R.string.history_booking)
     }
 
     override fun onDestroyView() {
