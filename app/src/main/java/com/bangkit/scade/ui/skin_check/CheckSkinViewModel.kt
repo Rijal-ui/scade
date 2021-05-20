@@ -19,5 +19,4 @@ class CheckSkinViewModel(val repository: Repository): ViewModel() {
             _resultCheckSkin.value = result
         }
     }
-
 }
