@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.os.Handler
 import com.bangkit.scade.R
 import com.bangkit.scade.ui.home.HomeActivity
+import com.bangkit.scade.ui.login.LoginActivity
 
 class MainSplashActivity : AppCompatActivity() {
     private lateinit var handler: Handler
@@ -17,7 +18,7 @@ class MainSplashActivity : AppCompatActivity() {
         handler = Handler(mainLooper)
         handler.postDelayed(
             {
-                val intent = Intent(this, HomeActivity::class.java)
+                val intent = Intent(this, LoginActivity::class.java)
                 startActivity(intent)
                 finish()
             }, 2500
