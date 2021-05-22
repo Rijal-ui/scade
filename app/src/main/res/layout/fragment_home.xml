@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/img_scade"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:src="@drawable/res_main_splash"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"

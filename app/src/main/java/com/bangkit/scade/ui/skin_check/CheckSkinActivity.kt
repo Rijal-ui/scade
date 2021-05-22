@@ -15,6 +15,7 @@ import androidx.core.content.FileProvider
 import androidx.lifecycle.ViewModelProvider
 import com.bangkit.scade.R
 import com.bangkit.scade.databinding.ActivityCheckSkinBinding
+import com.bangkit.scade.ui.hospital.HospitalActivity
 import com.bangkit.scade.viewmodel.ViewModelFactory
 import com.bumptech.glide.Glide
 import com.karumi.dexter.Dexter
@@ -26,6 +27,7 @@ import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
+
 
 class CheckSkinActivity : AppCompatActivity() {
 
@@ -49,6 +51,7 @@ class CheckSkinActivity : AppCompatActivity() {
             binding.progressBar.visibility = View.GONE
             binding.tvCheckResult.text = result.data[0]
             binding.tvCheckResult.visibility = View.VISIBLE
+            binding.btnBooking.visibility = View.VISIBLE
         })
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -86,6 +89,11 @@ class CheckSkinActivity : AppCompatActivity() {
                     Toast.LENGTH_SHORT
                 ).show()
             }
+        }
+
+        binding.btnBooking.setOnClickListener {
+            val intent = Intent(this, HospitalActivity::class.java)
+            startActivity(intent)
         }
 
     }

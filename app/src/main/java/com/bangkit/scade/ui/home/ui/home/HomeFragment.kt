@@ -6,13 +6,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bangkit.scade.databinding.FragmentHomeBinding
-import com.bangkit.scade.ui.hospital.splash.HospitalSplashActivity
-import com.bangkit.scade.ui.skin_check.CheckSkinActivity
 import com.bangkit.scade.ui.skin_check.splash.CheckSplashActivity
 
 class HomeFragment : Fragment() {

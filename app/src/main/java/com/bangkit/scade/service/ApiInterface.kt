@@ -14,5 +14,4 @@ interface ApiInterface {
         @Part image: MultipartBody.Part
     ): SkinImageResponse
 
-
 }

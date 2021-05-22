@@ -21,7 +21,7 @@ abstract class DataDatabase : RoomDatabase() {
                 Room.databaseBuilder(
                     context.applicationContext,
                     DataDatabase::class.java,
-                    "TokenSection.db"
+                    "TokenSession.db"
                 ).build().apply {
                     INSTANCE = this
                 }

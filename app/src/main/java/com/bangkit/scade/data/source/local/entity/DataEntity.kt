@@ -9,5 +9,5 @@ data class DataEntity(
 
     @PrimaryKey
     @ColumnInfo(name = "tokenSession")
-    var tokenSection: String? = null,
+    var tokenSession: String
 )
