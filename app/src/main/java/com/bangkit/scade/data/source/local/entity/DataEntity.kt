@@ -8,6 +8,9 @@ import androidx.room.PrimaryKey
 data class DataEntity(
 
     @PrimaryKey
+    @ColumnInfo(name = "id")
+    var id: Int,
+
     @ColumnInfo(name = "tokenSession")
-    var tokenSession: String
+    var tokenSection: String? = null
 )

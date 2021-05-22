@@ -2,6 +2,7 @@ package com.bangkit.scade.ui.skin_check
 
 import android.Manifest
 import android.content.Intent
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
@@ -23,8 +24,8 @@ import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
-import java.io.File
-import java.io.IOException
+import com.theartofdev.edmodo.cropper.CropImage
+import java.io.*
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -69,6 +70,7 @@ class CheckSkinActivity : AppCompatActivity() {
             dispatchTakePictureIntent()
         }
 
+
         binding.btnCheckSkin.setOnClickListener {
             try {
                 if (file.exists()) {
@@ -102,19 +104,64 @@ class CheckSkinActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == CAMERA_REQUEST_CODE && resultCode == RESULT_OK) {
             file = File(currentPhotoPath)
-            val myBitmap = BitmapFactory.decodeFile(file.absolutePath);
+            val myBitmap = BitmapFactory.decodeFile(file.absolutePath)
+            var cropbitmap: Bitmap? = null
+            if (myBitmap.width >= myBitmap.height) {
+                cropbitmap = Bitmap.createBitmap(
+                    myBitmap,
+                    myBitmap.width / 2 - myBitmap.height / 2,
+                    0,
+                    myBitmap.height,
+                    myBitmap.height
+                )
+            } else {
+                cropbitmap = Bitmap.createBitmap(
+                    myBitmap,
+                    0,
+                    myBitmap.height / 2 - myBitmap.width / 2,
+                    myBitmap.width,
+                    myBitmap.width
+                )
+            }
+
+
+            val os = ByteArrayOutputStream()
+            cropbitmap.compress(Bitmap.CompressFormat.JPEG, 100, os)
+            val bitmaparray = os.toByteArray()
+
+            val fos = FileOutputStream(file)
+            fos.write(bitmaparray)
+            fos.flush()
+            fos.close()
+
+            val checkbitmapcroped = BitmapFactory.decodeFile(file.absolutePath)
+
             Glide.with(this)
-                .load(myBitmap)
+                .load(checkbitmapcroped)
                 .into(binding.imgCheck)
         }
+
+        //crop
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+            val result = CropImage.getActivityResult(data)
+            if (resultCode == RESULT_OK) {
+                val resultUri = result.uri
+                file = File(resultUri.path)
+            } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
+                val error = result.error
+            }
+        }
+
     }
 
     private fun dispatchTakePictureIntent() {
-        Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
-            takePictureIntent.resolveActivity(packageManager)?.also {
+        Intent(
+            MediaStore.ACTION_IMAGE_CAPTURE
+        ).also { intent ->
+            intent.resolveActivity(packageManager)?.also {
                 val photoFile: File? = try {
                     createImageFile()
-                } catch (ex: IOException) {
+                } catch (e: IOException) {
                     null
                 }
                 photoFile?.also {
@@ -123,11 +170,36 @@ class CheckSkinActivity : AppCompatActivity() {
                         "com.bangkit.scade.fileprovider",
                         it
                     )
-                    takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
-                    startActivityForResult(takePictureIntent, CAMERA_REQUEST_CODE)
+                    intent.putExtra("aspectX", 1)
+                    intent.putExtra("aspectY", 1)
+                    intent.putExtra("scale", true)
+                    intent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
+
+
+                    startActivityForResult(intent, CAMERA_REQUEST_CODE)
                 }
             }
         }
+
+//        Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
+//            takePictureIntent.resolveActivity(packageManager)?.also {
+//                val photoFile: File? = try {
+//                    createImageFile()
+//                } catch (ex: IOException) {
+//                    null
+//                }
+//                photoFile?.also {
+//                    val photoURI: Uri = FileProvider.getUriForFile(
+//                        this,
+//                        "com.bangkit.scade.fileprovider",
+//                        it
+//                    )
+//                    takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
+//
+//                    startActivityForResult(takePictureIntent, CAMERA_REQUEST_CODE)
+//                }
+//            }
+//        }
     }
 
     private fun createImageFile(): File? {
@@ -162,5 +234,4 @@ class CheckSkinActivity : AppCompatActivity() {
     companion object {
         val CAMERA_REQUEST_CODE = 1
     }
-
 }

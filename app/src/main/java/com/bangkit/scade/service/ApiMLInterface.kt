@@ -1,12 +1,14 @@
 package com.bangkit.scade.service
 
+import com.bangkit.scade.data.source.remote.response.ArticlesResponse
 import com.bangkit.scade.data.source.remote.response.SkinImageResponse
 import okhttp3.MultipartBody
+import retrofit2.http.GET
 import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.Part
 
-interface ApiInterface {
+interface ApiMLInterface {
 
     @Multipart
     @POST("predict")

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.bangkit.scade" >
+    package="com.bangkit.scade">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -16,17 +16,14 @@
         android:theme="@style/Theme.Scade"
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup"
-        tools:targetApi="m" >
-        <activity
-            android:name=".ui.splash.EndSplashActivity"
-            android:parentActivityName=".ui.home.HomeActivity" />
-        <activity android:name=".ui.booking_hospital.BookingHospitalActivity" />
+        tools:targetApi="m">
+        <activity android:name=".ui.login.LoginActivity"></activity>
 
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.bangkit.scade.fileprovider"
             android:exported="false"
-            android:grantUriPermissions="true" >
+            android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/filepaths" />
@@ -34,7 +31,9 @@
 
         <activity android:name=".ui.detailinformation.DetailInformationActivity" />
         <activity
-            android:name=".ui.hospital.HospitalActivity"/>
+            android:name=".ui.hospital.HospitalActivity"
+            android:parentActivityName=".ui.home.HomeActivity" />
+        <activity android:name=".ui.hospital.splash.HospitalSplashActivity" />
         <activity
             android:name=".ui.skin_check.CheckSkinActivity"
             android:parentActivityName=".ui.home.HomeActivity" />
@@ -44,14 +43,15 @@
             android:label="@string/title_activity_home" />
         <activity
             android:name=".ui.splash.MainSplashActivity"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" >
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.theartofdev.edmodo.cropper.CropImageActivity"/>
+        <activity android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+            android:theme="@style/Base.Theme.AppCompat"/>
     </application>
 
 </manifest>
