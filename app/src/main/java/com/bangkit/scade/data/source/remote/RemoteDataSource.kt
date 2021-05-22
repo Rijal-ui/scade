@@ -1,23 +1,33 @@
 package com.bangkit.scade.data.source.remote
 
+import com.bangkit.scade.data.source.remote.response.ArticlesResponse
 import com.bangkit.scade.data.source.remote.response.SkinImageResponse
-import com.bangkit.scade.service.ApiInterface
+import com.bangkit.scade.service.ApiMLInterface
+import com.bangkit.scade.service.ApiBackendInterface
 import okhttp3.MultipartBody
 
-class RemoteDataSource constructor(private val apiService: ApiInterface){
+class RemoteDataSource constructor(private val apiMLService: ApiMLInterface, private val apiBackendService: ApiBackendInterface){
 
     companion object {
         @Volatile
         private var instance: RemoteDataSource? = null
 
-        fun getInstance(apiService: ApiInterface) : RemoteDataSource =
+        fun getInstance(apiMLService: ApiMLInterface, apiBackendService: ApiBackendInterface) : RemoteDataSource =
             instance ?: synchronized(this) {
-                RemoteDataSource(apiService).apply { instance = this }
+                RemoteDataSource(apiMLService,apiBackendService).apply { instance = this }
             }
     }
 
     suspend fun uploadImage(image: MultipartBody.Part): SkinImageResponse {
-        return apiService.uploadImage(image)
+        return apiMLService.uploadImage(image)
+    }
+
+    suspend fun getListEnglish(): ArticlesResponse {
+        return  apiBackendService.getArticleListEnglish()
+    }
+
+    suspend fun getListIndonesia(): ArticlesResponse {
+        return apiBackendService.getArticleListIndonesia()
     }
 
 }
