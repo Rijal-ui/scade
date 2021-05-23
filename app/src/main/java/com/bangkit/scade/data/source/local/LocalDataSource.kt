@@ -1,6 +1,7 @@
 package com.bangkit.scade.data.source.local
 
 import androidx.lifecycle.LiveData
+import androidx.sqlite.db.SimpleSQLiteQuery
 import com.bangkit.scade.data.source.local.entity.DataEntity
 import com.bangkit.scade.data.source.local.room.DataDao
 
@@ -22,4 +23,10 @@ class LocalDataSource private constructor(private val dataDao: DataDao){
     fun deleteDataCheck(data: DataEntity) {
         dataDao.delete(data)
     }
+
+    fun checkDataExist(id: Int) : Boolean {
+        val query = SimpleSQLiteQuery("SELECT EXISTS(SELECT * FROM session where id = $id)")
+        return dataDao.checkDataExist(query)
+    }
+
 }

@@ -27,4 +27,8 @@
     <string name="login">Login</string>
     <string name="register">Register</string>
     <string name="error_message">Something went wrong</string>
+    <string name="name">Name</string>
+    <string name="address">Address</string>
+    <string name="retype_password">Retype Password</string>
+    <string name="session_end">Session expired, please login again</string>
 </resources>

@@ -5,6 +5,7 @@ import com.bangkit.scade.data.source.local.LocalDataSource
 import com.bangkit.scade.data.source.local.entity.DataEntity
 import com.bangkit.scade.data.source.local.entity.InformationEntity
 import com.bangkit.scade.data.source.remote.RemoteDataSource
+import com.bangkit.scade.data.source.remote.response.SessionResponse
 import com.bangkit.scade.data.source.remote.response.SkinImageResponse
 import com.bangkit.scade.utils.AppExecutors
 import kotlinx.coroutines.Dispatchers
@@ -15,7 +16,7 @@ import okhttp3.RequestBody
 import java.io.File
 
 class Repository constructor(
-    private val remoteDataSourceML: RemoteDataSource,
+    private val remoteDataSource: RemoteDataSource,
     private val localDataSource: LocalDataSource,
     private val appExecutors: AppExecutors
 ) : DataSource {
@@ -38,12 +39,12 @@ class Repository constructor(
         return withContext(Dispatchers.IO) {
             val payload = RequestBody.create("image/*".toMediaTypeOrNull(), image)
             val body = MultipartBody.Part.createFormData("skin_image", image.name, payload)
-            remoteDataSourceML.uploadImage(body)
+            remoteDataSource.uploadImage(body)
         }
     }
 
     override suspend fun getListEnglishArticle(): List<InformationEntity> {
-        val result = withContext(Dispatchers.IO) { (remoteDataSourceML.getListEnglish()) }
+        val result = withContext(Dispatchers.IO) { (remoteDataSource.getListEnglish()) }
         val listArticle = ArrayList<InformationEntity>()
         result.data?.forEach { response ->
             if (response != null) {
@@ -64,7 +65,7 @@ class Repository constructor(
     }
 
     override suspend fun getListIndoensiaArticle(): List<InformationEntity> {
-        val result = withContext(Dispatchers.IO) { (remoteDataSourceML.getListIndonesia()) }
+        val result = withContext(Dispatchers.IO) { (remoteDataSource.getListIndonesia()) }
         val listArticle = ArrayList<InformationEntity>()
         result.data?.forEach { response ->
             if (response != null) {
@@ -84,6 +85,10 @@ class Repository constructor(
         return listArticle
     }
 
+    override suspend fun checkSession(token: String): SessionResponse {
+        return withContext(Dispatchers.IO) { remoteDataSource.checkSession(token) }
+    }
+
 
     override fun getDataCheck(): LiveData<DataEntity> {
         return localDataSource.getDataCheck()
@@ -100,4 +105,14 @@ class Repository constructor(
             localDataSource.deleteDataCheck(data)
         }
     }
+
+    override fun checkDataExist(id: Int): Boolean {
+        var result = false
+        appExecutors.diskIO().execute {
+            result = localDataSource.checkDataExist(id)
+        }
+        return result
+    }
+
+
 }

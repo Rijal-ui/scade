@@ -10,7 +10,7 @@ import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.launch
 import java.io.File
 
-class CheckSkinViewModel(val repository: Repository): ViewModel() {
+class CheckSkinViewModel(private val repository: Repository): ViewModel() {
 
     private var _resultCheckSkin = MutableLiveData<Resource<SkinImageResponse>>()
     val resultCheckSkin = _resultCheckSkin

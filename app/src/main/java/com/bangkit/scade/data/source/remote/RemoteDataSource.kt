@@ -1,6 +1,7 @@
 package com.bangkit.scade.data.source.remote
 
 import com.bangkit.scade.data.source.remote.response.ArticlesResponse
+import com.bangkit.scade.data.source.remote.response.SessionResponse
 import com.bangkit.scade.data.source.remote.response.SkinImageResponse
 import com.bangkit.scade.service.ApiMLInterface
 import com.bangkit.scade.service.ApiBackendInterface
@@ -28,6 +29,10 @@ class RemoteDataSource constructor(private val apiMLService: ApiMLInterface, pri
 
     suspend fun getListIndonesia(): ArticlesResponse {
         return apiBackendService.getArticleListIndonesia()
+    }
+
+    suspend fun checkSession(token: String): SessionResponse {
+        return apiBackendService.checkSession(token)
     }
 
 }

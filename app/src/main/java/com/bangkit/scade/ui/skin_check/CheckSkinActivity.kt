@@ -17,13 +17,14 @@ import androidx.lifecycle.ViewModelProvider
 import com.bangkit.scade.R
 import com.bangkit.scade.databinding.ActivityCheckSkinBinding
 import com.bangkit.scade.viewmodel.ViewModelFactory
+import com.bangkit.scade.vo.Status
+import com.bangkit.scade.vo.Status.*
 import com.bumptech.glide.Glide
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
-import com.theartofdev.edmodo.cropper.CropImage
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
@@ -51,13 +52,27 @@ class CheckSkinActivity : AppCompatActivity() {
         )[CheckSkinViewModel::class.java]
 
         viewModel.resultCheckSkin.observe(this, { result ->
-            binding.progressBar.visibility = View.GONE
-            if (result.data != null) {
-                binding.tvCheckResult.text = result.data.data[0]
-                binding.tvCheckResult.visibility = View.VISIBLE
-            } else {
-                Toast.makeText(this, getString(R.string.error_message), Toast.LENGTH_SHORT).show()
+            when (result.status) {
+                SUCCESS -> {
+                    result.data?.let { binding.tvCheckResult.text = result.data.data[0]}
+                    binding.progressBar.visibility = View.GONE
+                    binding.tvCheckResult.visibility = View.VISIBLE
+                }
+                LOADING -> {
+                    binding.progressBar.visibility = View.VISIBLE
+                }
+                ERROR -> {
+                    binding.progressBar.visibility = View.GONE
+                    Toast.makeText(this, getString(R.string.error_message), Toast.LENGTH_SHORT).show()
+                }
             }
+//            if (result != null) {
+//                binding.tvCheckResult.text = result.data.data[0]
+//                binding.tvCheckResult.visibility = View.VISIBLE
+//            } else {
+//                Toast.makeText(this, getString(R.string.error_message), Toast.LENGTH_SHORT).show()
+//            }
+//            binding.progressBar.visibility = View.GONE
         })
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -140,17 +155,17 @@ class CheckSkinActivity : AppCompatActivity() {
                 .load(checkbitmapcroped)
                 .into(binding.imgCheck)
         }
-
-        //crop
-        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
-            val result = CropImage.getActivityResult(data)
-            if (resultCode == RESULT_OK) {
-                val resultUri = result.uri
-                file = File(resultUri.path)
-            } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
-                val error = result.error
-            }
-        }
+//
+//        //crop
+//        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+//            val result = CropImage.getActivityResult(data)
+//            if (resultCode == RESULT_OK) {
+//                val resultUri = result.uri
+//                file = File(resultUri.path)
+//            } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
+//                val error = result.error
+//            }
+//        }
 
     }
 
