@@ -54,10 +54,10 @@ class CheckSkinActivity : AppCompatActivity() {
             binding.progressBar.visibility = View.GONE
             if (result.data != null) {
                 binding.tvCheckResult.text = result.data.data[0]
+                binding.tvCheckResult.visibility = View.VISIBLE
             } else {
-                binding.tvCheckResult.text = getString(R.string.error_message)
+                Toast.makeText(this, getString(R.string.error_message), Toast.LENGTH_SHORT).show()
             }
-            binding.tvCheckResult.visibility = View.VISIBLE
         })
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
