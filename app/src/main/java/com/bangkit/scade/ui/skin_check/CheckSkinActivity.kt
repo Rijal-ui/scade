@@ -24,7 +24,10 @@ import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.theartofdev.edmodo.cropper.CropImage
-import java.io.*
+import java.io.ByteArrayOutputStream
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -49,7 +52,11 @@ class CheckSkinActivity : AppCompatActivity() {
 
         viewModel.resultCheckSkin.observe(this, { result ->
             binding.progressBar.visibility = View.GONE
-            binding.tvCheckResult.text = result.data[0]
+            if (result.data != null) {
+                binding.tvCheckResult.text = result.data.data[0]
+            } else {
+                binding.tvCheckResult.text = getString(R.string.error_message)
+            }
             binding.tvCheckResult.visibility = View.VISIBLE
         })
 
