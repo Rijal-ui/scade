@@ -27,4 +27,7 @@ class CheckSkinViewModel(private val repository: Repository): ViewModel() {
             _resultCheckSkin.postValue(Resource.success(result))
         }
     }
+
+    
+
 }

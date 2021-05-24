@@ -2,7 +2,7 @@ package com.bangkit.scade.data.source.remote.response
 
 import com.google.gson.annotations.SerializedName
 
-data class SignInResponse(
+data class LoginResponse(
 
 	@field:SerializedName("data")
 	val data: String? = null,

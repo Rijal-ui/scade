@@ -4,9 +4,7 @@ import androidx.lifecycle.LiveData
 import com.bangkit.scade.data.source.local.entity.DataEntity
 import com.bangkit.scade.data.source.local.entity.HospitalEntity
 import com.bangkit.scade.data.source.local.entity.InformationEntity
-import com.bangkit.scade.data.source.remote.response.ArticlesResponse
-import com.bangkit.scade.data.source.remote.response.SessionResponse
-import com.bangkit.scade.data.source.remote.response.SkinImageResponse
+import com.bangkit.scade.data.source.remote.response.*
 import java.io.File
 
 interface DataSource {
@@ -20,6 +18,10 @@ interface DataSource {
     suspend fun getListHospital() : List<HospitalEntity>
 
     suspend fun checkSession(token: String): SessionResponse
+
+    suspend fun login(loginData: LoginRequest): LoginResponse
+
+    suspend fun register(registerData: RegisterRequest): RegisterResponse
 
     fun getDataCheck(): LiveData<DataEntity>
 
