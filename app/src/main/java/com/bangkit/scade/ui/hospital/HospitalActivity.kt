@@ -2,11 +2,14 @@ package com.bangkit.scade.ui.hospital
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bangkit.scade.R
 import com.bangkit.scade.databinding.ActivityHospitalBinding
 import com.bangkit.scade.viewmodel.ViewModelFactory
+import com.bangkit.scade.vo.Status
 
 class HospitalActivity : AppCompatActivity() {
 
@@ -35,9 +38,23 @@ class HospitalActivity : AppCompatActivity() {
             factory
         )[HospitalViewModel::class.java]
 
-        viewModel.listHospital.observe(this, { list ->
-            adapter.setHospital(list)
-            adapter.notifyDataSetChanged()
+        viewModel.setListHospital()
+
+        viewModel.listHospital.observe(this, { result ->
+            when (result.status) {
+                Status.SUCCESS -> {
+                    result.data?.let { adapter.setHospital(result.data)}
+                    adapter.notifyDataSetChanged()
+                    binding.progressBar.visibility = View.GONE
+                }
+                Status.LOADING -> {
+                    binding.progressBar.visibility = View.VISIBLE
+                }
+                Status.ERROR -> {
+                    binding.progressBar.visibility = View.GONE
+                    Toast.makeText(this, getString(R.string.error_message), Toast.LENGTH_SHORT).show()
+                }
+            }
         })
     }
 }

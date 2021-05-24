@@ -3,6 +3,7 @@ package com.bangkit.scade.data.source
 import androidx.lifecycle.LiveData
 import com.bangkit.scade.data.source.local.LocalDataSource
 import com.bangkit.scade.data.source.local.entity.DataEntity
+import com.bangkit.scade.data.source.local.entity.HospitalEntity
 import com.bangkit.scade.data.source.local.entity.InformationEntity
 import com.bangkit.scade.data.source.remote.RemoteDataSource
 import com.bangkit.scade.data.source.remote.response.SessionResponse
@@ -84,6 +85,29 @@ class Repository constructor(
         }
         return listArticle
     }
+
+    override suspend fun getListHospital(): List<HospitalEntity> {
+        val result = withContext(Dispatchers.IO) { (remoteDataSource.getListHospital())}
+        val listHospital = ArrayList<HospitalEntity>()
+        result.data?.forEach { response ->
+            if (response != null) {
+                val hospital = HospitalEntity(
+                    id = response.id,
+                    name = response.name,
+                    address = response.address,
+                    phone = response.phone,
+                    city = response.city,
+                    province = response.province,
+                    createdAt = response.createdAt,
+                    deletedAt = response.deletedAt,
+                    updatedAt = response.updatedAt
+                )
+                listHospital.add(hospital)
+            }
+        }
+        return listHospital
+    }
+
 
     override suspend fun checkSession(token: String): SessionResponse {
         return withContext(Dispatchers.IO) { remoteDataSource.checkSession(token) }
