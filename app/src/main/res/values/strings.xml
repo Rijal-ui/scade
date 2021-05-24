@@ -31,4 +31,8 @@
     <string name="address">Address</string>
     <string name="retype_password">Retype Password</string>
     <string name="session_end">Session expired, please login again</string>
+    <string name="booking">BOOKING A HOSPITAL</string>
+    <string name="send">SEND</string>
+    <string name="booking_hospital">You have booked the hospital</string>
+    <string name="back_to_home">BACK TO HOME</string>
 </resources>

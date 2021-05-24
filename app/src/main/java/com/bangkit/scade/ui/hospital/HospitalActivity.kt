@@ -2,21 +2,59 @@ package com.bangkit.scade.ui.hospital
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.core.app.NavUtils
+import android.view.View
+import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bangkit.scade.R
+import com.bangkit.scade.databinding.ActivityHospitalBinding
+import com.bangkit.scade.viewmodel.ViewModelFactory
+import com.bangkit.scade.vo.Status
 
 class HospitalActivity : AppCompatActivity() {
+
+    private lateinit var viewModel: HospitalViewModel
+    private lateinit var adapter: HospitalAdapter
+    private lateinit var binding: ActivityHospitalBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_hospital)
+
+        binding = ActivityHospitalBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = getString(R.string.splash_hospital_1)
-    }
 
-    override fun onBackPressed() {
-        super.onBackPressed()
-        NavUtils.navigateUpFromSameTask(this)
-    }
+        adapter = HospitalAdapter()
+        adapter.notifyDataSetChanged()
 
+        binding.rvListHospital.layoutManager = LinearLayoutManager(this)
+        binding.rvListHospital.adapter = adapter
+
+        val factory = ViewModelFactory.getInstance(this)
+        viewModel = ViewModelProvider(
+            this,
+            factory
+        )[HospitalViewModel::class.java]
+
+        viewModel.setListHospital()
+
+        viewModel.listHospital.observe(this, { result ->
+            when (result.status) {
+                Status.SUCCESS -> {
+                    result.data?.let { adapter.setHospital(result.data)}
+                    adapter.notifyDataSetChanged()
+                    binding.progressBar.visibility = View.GONE
+                }
+                Status.LOADING -> {
+                    binding.progressBar.visibility = View.VISIBLE
+                }
+                Status.ERROR -> {
+                    binding.progressBar.visibility = View.GONE
+                    Toast.makeText(this, getString(R.string.error_message), Toast.LENGTH_SHORT).show()
+                }
+            }
+        })
+    }
 }

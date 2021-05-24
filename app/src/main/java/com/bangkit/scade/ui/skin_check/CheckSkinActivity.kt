@@ -16,6 +16,7 @@ import androidx.core.content.FileProvider
 import androidx.lifecycle.ViewModelProvider
 import com.bangkit.scade.R
 import com.bangkit.scade.databinding.ActivityCheckSkinBinding
+import com.bangkit.scade.ui.hospital.HospitalActivity
 import com.bangkit.scade.viewmodel.ViewModelFactory
 import com.bangkit.scade.vo.Status
 import com.bangkit.scade.vo.Status.*
@@ -57,6 +58,7 @@ class CheckSkinActivity : AppCompatActivity() {
                     result.data?.let { binding.tvCheckResult.text = result.data.data[0]}
                     binding.progressBar.visibility = View.GONE
                     binding.tvCheckResult.visibility = View.VISIBLE
+                    binding.btnBooking.visibility = View.VISIBLE
                 }
                 LOADING -> {
                     binding.progressBar.visibility = View.VISIBLE
@@ -90,6 +92,10 @@ class CheckSkinActivity : AppCompatActivity() {
             dispatchTakePictureIntent()
         }
 
+        binding.btnBooking.setOnClickListener {
+            val intent = Intent(this, HospitalActivity::class.java)
+            startActivity(intent)
+        }
 
         binding.btnCheckSkin.setOnClickListener {
             try {
