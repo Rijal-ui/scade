@@ -1,8 +1,7 @@
 package com.bangkit.scade.service
 
-import com.bangkit.scade.data.source.remote.response.ArticlesResponse
-import com.bangkit.scade.data.source.remote.response.HospitalResponse
-import com.bangkit.scade.data.source.remote.response.SessionResponse
+import com.bangkit.scade.data.source.remote.response.*
+import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
@@ -23,7 +22,5 @@ interface ApiBackendInterface {
     ) : SessionResponse
 
     @POST("auth/sign_in")
-    suspend fun signIn(
-
-    )
+    suspend fun signIn(@Body loginData: LoginRequest): LoginResponse
 }

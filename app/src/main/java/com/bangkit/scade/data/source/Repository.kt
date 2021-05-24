@@ -6,6 +6,8 @@ import com.bangkit.scade.data.source.local.entity.DataEntity
 import com.bangkit.scade.data.source.local.entity.HospitalEntity
 import com.bangkit.scade.data.source.local.entity.InformationEntity
 import com.bangkit.scade.data.source.remote.RemoteDataSource
+import com.bangkit.scade.data.source.remote.response.LoginRequest
+import com.bangkit.scade.data.source.remote.response.LoginResponse
 import com.bangkit.scade.data.source.remote.response.SessionResponse
 import com.bangkit.scade.data.source.remote.response.SkinImageResponse
 import com.bangkit.scade.utils.AppExecutors
@@ -111,6 +113,10 @@ class Repository constructor(
 
     override suspend fun checkSession(token: String): SessionResponse {
         return withContext(Dispatchers.IO) { remoteDataSource.checkSession(token) }
+    }
+
+    override suspend fun signIn(loginData: LoginRequest): LoginResponse {
+        return withContext(Dispatchers.IO) {remoteDataSource.login(loginData)}
     }
 
 

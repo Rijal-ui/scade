@@ -8,6 +8,7 @@ import com.bangkit.scade.di.Injection
 import com.bangkit.scade.ui.home.ui.home.HomeViewModel
 import com.bangkit.scade.ui.home.ui.information.InformationViewModel
 import com.bangkit.scade.ui.hospital.HospitalViewModel
+import com.bangkit.scade.ui.login.LoginViewModel
 import com.bangkit.scade.ui.skin_check.CheckSkinViewModel
 import com.bangkit.scade.ui.splash.MainSplashViewModel
 
@@ -41,6 +42,9 @@ class ViewModelFactory private constructor(private val repository: Repository) :
             }
             modelClass.isAssignableFrom(MainSplashViewModel::class.java) -> {
                 MainSplashViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(LoginViewModel::class.java) -> {
+                LoginViewModel(repository) as T
             }
             else ->throw Throwable("Unknown ViewModel class: " + modelClass.name)
         }
