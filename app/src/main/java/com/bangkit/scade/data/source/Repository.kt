@@ -6,10 +6,7 @@ import com.bangkit.scade.data.source.local.entity.DataEntity
 import com.bangkit.scade.data.source.local.entity.HospitalEntity
 import com.bangkit.scade.data.source.local.entity.InformationEntity
 import com.bangkit.scade.data.source.remote.RemoteDataSource
-import com.bangkit.scade.data.source.remote.response.LoginRequest
-import com.bangkit.scade.data.source.remote.response.LoginResponse
-import com.bangkit.scade.data.source.remote.response.SessionResponse
-import com.bangkit.scade.data.source.remote.response.SkinImageResponse
+import com.bangkit.scade.data.source.remote.response.*
 import com.bangkit.scade.utils.AppExecutors
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -115,8 +112,12 @@ class Repository constructor(
         return withContext(Dispatchers.IO) { remoteDataSource.checkSession(token) }
     }
 
-    override suspend fun signIn(loginData: LoginRequest): LoginResponse {
+    override suspend fun login(loginData: LoginRequest): LoginResponse {
         return withContext(Dispatchers.IO) {remoteDataSource.login(loginData)}
+    }
+
+    override suspend fun register(registerData: RegisterRequest): RegisterResponse {
+        return withContext(Dispatchers.IO) {remoteDataSource.register(registerData)}
     }
 
 

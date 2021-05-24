@@ -38,7 +38,10 @@ class RemoteDataSource constructor(private val apiMLService: ApiMLInterface, pri
     }
 
     suspend fun login(loginData: LoginRequest): LoginResponse {
-        return apiBackendService.signIn(loginData)
+        return apiBackendService.login(loginData)
     }
 
+    suspend fun register(registerData: RegisterRequest) : RegisterResponse {
+        return apiBackendService.register(registerData)
+    }
 }

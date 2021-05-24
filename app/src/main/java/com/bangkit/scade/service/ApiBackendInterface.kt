@@ -8,10 +8,10 @@ import retrofit2.http.POST
 
 interface ApiBackendInterface {
     @GET("articles/english")
-    suspend fun getArticleListEnglish() : ArticlesResponse
+    suspend fun getArticleListEnglish(): ArticlesResponse
 
     @GET("articles/indonesia")
-    suspend fun getArticleListIndonesia() : ArticlesResponse
+    suspend fun getArticleListIndonesia(): ArticlesResponse
 
     @GET("hospitals")
     suspend fun getListHospital(): HospitalResponse
@@ -19,8 +19,11 @@ interface ApiBackendInterface {
     @GET("article_languages")
     suspend fun checkSession(
         @Header("Authorization") token: String
-    ) : SessionResponse
+    ): SessionResponse
 
     @POST("auth/sign_in")
-    suspend fun signIn(@Body loginData: LoginRequest): LoginResponse
+    suspend fun login(@Body loginData: LoginRequest): LoginResponse
+
+    @POST("auth/sign_up")
+    suspend fun register(@Body registerData: RegisterRequest): RegisterResponse
 }

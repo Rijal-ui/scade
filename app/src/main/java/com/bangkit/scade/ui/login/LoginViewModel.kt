@@ -21,10 +21,10 @@ class LoginViewModel(private val repository: Repository) : ViewModel() {
     }
 
     //action login
-    fun login(userData: LoginRequest) {
-        viewModelScope.launch {
+    fun login(loginData: LoginRequest) {
+        viewModelScope.launch(exceptionHandler) {
             _login.postValue(Resource.loading(null))
-            val result = repository.signIn(userData)
+            val result = repository.login(loginData)
             _login.postValue(Resource.success(result))
         }
     }

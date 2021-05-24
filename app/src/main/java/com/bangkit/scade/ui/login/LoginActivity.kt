@@ -3,6 +3,7 @@ package com.bangkit.scade.ui.login
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.util.Patterns
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -44,36 +45,53 @@ class LoginActivity : AppCompatActivity() {
 
         binding.btLogin.setOnClickListener {
             //check login
-            val userData = LoginRequest(
+            val loginData = LoginRequest(
                 email = binding.editEmail.text.toString(),
                 password = binding.editPassword.text.toString()
             )
 
-            viewModel.login(userData)
+
+            viewModel.login(loginData)
 
             viewModel.login.observe(this, { result ->
                 when (result.status) {
                     SUCCESS -> {
-                        if (result.data?.data != null) {
-                            viewModel.insertSession(
-                                DataEntity(
-                                    id = 1,
-                                    tokenSection = result.data.data
+                        Log.d("result", result.data?.message.toString())
+                        if (result.data?.message.toString() == "sign in successfully") {
+                            if (result.data?.data != null) {
+                                viewModel.insertSession(
+                                    DataEntity(
+                                        id = 1,
+                                        tokenSection = result.data.data
+                                    )
                                 )
-                            )
+                            }
+                            val intent = Intent(this, HomeActivity::class.java)
+                            startActivity(intent)
+                        } else {
+                            Toast.makeText(
+                                this,
+                                getString(R.string.error_login),
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
-                        val intent = Intent(this, HomeActivity::class.java)
-                        startActivity(intent)
+
+
                     }
                     LOADING -> {
                     }
                     ERROR -> {
-                        Toast.makeText(this, getString(R.string.error_message), Toast.LENGTH_SHORT)
+                        Toast.makeText(
+                            this,
+                            getString(R.string.error_message),
+                            Toast.LENGTH_SHORT
+                        )
                             .show()
                     }
                 }
-
             })
+
+
         }
 
         val emailStream = RxTextView.textChanges(binding.editEmail)
@@ -133,5 +151,4 @@ class LoginActivity : AppCompatActivity() {
     private fun showEmailExistAlert(isNotValid: Boolean) {
         binding.editEmail.error = if (isNotValid) getString(R.string.email_not_valid) else null
     }
-
 }

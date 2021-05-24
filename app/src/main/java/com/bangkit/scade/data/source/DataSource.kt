@@ -19,7 +19,9 @@ interface DataSource {
 
     suspend fun checkSession(token: String): SessionResponse
 
-    suspend fun signIn(loginData: LoginRequest): LoginResponse
+    suspend fun login(loginData: LoginRequest): LoginResponse
+
+    suspend fun register(registerData: RegisterRequest): RegisterResponse
 
     fun getDataCheck(): LiveData<DataEntity>
 
