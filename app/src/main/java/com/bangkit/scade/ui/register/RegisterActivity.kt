@@ -1,5 +1,6 @@
 package com.bangkit.scade.ui.register
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -16,10 +17,13 @@ class RegisterActivity : AppCompatActivity() {
         val REQUEST_REGISTER = 1
     }
 
+    @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
 
         binding.btRegister.setOnClickListener {
             val resultIntent = Intent()
@@ -35,5 +39,7 @@ class RegisterActivity : AppCompatActivity() {
         super.onBackPressed()
         NavUtils.navigateUpFromSameTask(this)
     }
+
+
 
 }

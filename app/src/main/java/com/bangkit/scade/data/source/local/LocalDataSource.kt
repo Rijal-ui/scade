@@ -24,7 +24,7 @@ class LocalDataSource private constructor(private val dataDao: DataDao){
         dataDao.delete(data)
     }
 
-    fun checkDataExist(id: Int) : Boolean {
+    fun checkDataExist(id: Int) : LiveData<Boolean> {
         val query = SimpleSQLiteQuery("SELECT EXISTS(SELECT * FROM session where id = $id)")
         return dataDao.checkDataExist(query)
     }

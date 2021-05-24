@@ -106,12 +106,8 @@ class Repository constructor(
         }
     }
 
-    override fun checkDataExist(id: Int): Boolean {
-        var result = false
-        appExecutors.diskIO().execute {
-            result = localDataSource.checkDataExist(id)
-        }
-        return result
+    override fun checkDataExist(id: Int): LiveData<Boolean> {
+        return localDataSource.checkDataExist(id)
     }
 
 

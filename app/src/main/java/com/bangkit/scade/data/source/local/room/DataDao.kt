@@ -21,6 +21,6 @@ interface DataDao {
     fun update(data: DataEntity)
 
     @RawQuery(observedEntities = [DataEntity::class])
-    fun checkDataExist(query: SupportSQLiteQuery): Boolean
+    fun checkDataExist(query: SupportSQLiteQuery): LiveData<Boolean>
 
 }

@@ -24,7 +24,7 @@ interface DataSource {
 
     fun removeDataCheck(data: DataEntity)
 
-    fun checkDataExist(id: Int): Boolean
+    fun checkDataExist(id: Int): LiveData<Boolean>
 
 
 

@@ -3,16 +3,14 @@ package com.bangkit.scade.ui.splash
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.bangkit.scade.R
-import com.bangkit.scade.data.source.remote.response.SessionResponse
 import com.bangkit.scade.ui.home.HomeActivity
 import com.bangkit.scade.ui.login.LoginActivity
 import com.bangkit.scade.viewmodel.ViewModelFactory
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 
 class MainSplashActivity : AppCompatActivity() {
     private lateinit var handler: Handler
@@ -20,7 +18,7 @@ class MainSplashActivity : AppCompatActivity() {
     private lateinit var viewModel: MainSplashViewModel
     private var exist: Boolean = false
     private lateinit var token: String
-    private lateinit var session: String
+    private var session: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,27 +29,45 @@ class MainSplashActivity : AppCompatActivity() {
             this,
             factory
         )[MainSplashViewModel::class.java]
-        viewModel.exist.observe(this, { result ->
-            exist = result
-        })
         viewModel.dataSession.observe(this, { result ->
             token = result.tokenSection
         })
         viewModel.session.observe(this, { result ->
+            Log.d("inisessionmessage:", session)
             if (result.message != null) {
                 session = result.message
+                Log.d("inisessionmessage:", session)
             }
         })
+
+        viewModel.checkExist().observe(this, {
+            exist = it
+            Log.d("inicheckexist", exist.toString())
+            if (exist) {
+                viewModel.setDataSession().observe(this, { entity ->
+                    token = entity.tokenSection
+                    Log.d("inichecktokenac", entity.tokenSection)
+                    viewModel.checkSession(token)
+                    viewModel.session.observe(this, { result ->
+                        session = result.message.toString()
+                        Log.d("inisession", session)
+                    })
+                })
+            }
+
+        })
+
+
+
 
         handler = Handler(mainLooper)
         handler.postDelayed(
             {
+
                 if (exist) { //sudah pernah login
                     //check session expired atau tidak
                     //ambil token dari database
-                    viewModel.setDataSession()
-                    viewModel.checkSession(token)
-                    if (session == "fetch data successfully") { //session masih oke
+                    if (session.equals("fetch data successfully")) { //session masih oke
                         val intent = Intent(this, HomeActivity::class.java)
                         startActivity(intent)
                         finish()
@@ -62,11 +78,9 @@ class MainSplashActivity : AppCompatActivity() {
                         startActivity(intent)
                         finish()
                     }
-                    //tembak api checkSession
-                    //check token expired atau tidak
 
                 } else { //belum pernah login
-//                    Toast.makeText(this, "No login history", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "No login history", Toast.LENGTH_SHORT).show()
                     val intent = Intent(this, LoginActivity::class.java)
                     startActivity(intent)
                     finish()
@@ -102,7 +116,7 @@ class MainSplashActivity : AppCompatActivity() {
                     finish()
                 } */
 
-            }, 1000
+            }, 2000
         )
 
     }
