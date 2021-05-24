@@ -35,4 +35,6 @@
     <string name="send">SEND</string>
     <string name="booking_hospital">You have booked the hospital</string>
     <string name="back_to_home">BACK TO HOME</string>
+    <string name="email_not_valid">Invalid email format</string>
+    <string name="password_not_same">Password not same</string>
 </resources>

@@ -5,6 +5,7 @@ import com.bangkit.scade.data.source.remote.response.HospitalResponse
 import com.bangkit.scade.data.source.remote.response.SessionResponse
 import retrofit2.http.GET
 import retrofit2.http.Header
+import retrofit2.http.POST
 
 interface ApiBackendInterface {
     @GET("articles/english")
@@ -20,4 +21,9 @@ interface ApiBackendInterface {
     suspend fun checkSession(
         @Header("Authorization") token: String
     ) : SessionResponse
+
+    @POST("auth/sign_in")
+    suspend fun signIn(
+
+    )
 }
