@@ -33,7 +33,6 @@
         <activity
             android:name=".ui.hospital.HospitalActivity"
             android:parentActivityName=".ui.home.HomeActivity" />
-        <activity android:name=".ui.hospital.splash.HospitalSplashActivity" />
         <activity
             android:name=".ui.skin_check.CheckSkinActivity"
             android:parentActivityName=".ui.home.HomeActivity" />

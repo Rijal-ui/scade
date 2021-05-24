@@ -1,15 +1,17 @@
 package com.bangkit.scade.ui.hospital
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.core.app.NavUtils
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bangkit.scade.R
 import com.bangkit.scade.databinding.ActivityHospitalBinding
-import com.bangkit.scade.ui.booking_hospital.BookingHospitalActivity
+import com.bangkit.scade.viewmodel.ViewModelFactory
 
 class HospitalActivity : AppCompatActivity() {
 
+    private lateinit var viewModel: HospitalViewModel
+    private lateinit var adapter: HospitalAdapter
     private lateinit var binding: ActivityHospitalBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,9 +23,21 @@ class HospitalActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = getString(R.string.splash_hospital_1)
 
-        binding.findHospital.setOnClickListener {
-            val intent = Intent(this, BookingHospitalActivity::class.java)
-            startActivity(intent)
-        }
+        adapter = HospitalAdapter()
+        adapter.notifyDataSetChanged()
+
+        binding.rvListHospital.layoutManager = LinearLayoutManager(this)
+        binding.rvListHospital.adapter = adapter
+
+        val factory = ViewModelFactory.getInstance(this)
+        viewModel = ViewModelProvider(
+            this,
+            factory
+        )[HospitalViewModel::class.java]
+
+        viewModel.listHospital.observe(this, { list ->
+            adapter.setHospital(list)
+            adapter.notifyDataSetChanged()
+        })
     }
 }

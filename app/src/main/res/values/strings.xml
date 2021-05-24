@@ -26,4 +26,8 @@
     <string name="password">Password</string>
     <string name="login">Login</string>
     <string name="register">Register</string>
+    <string name="booking">BOOKING A HOSPITAL</string>
+    <string name="send">SEND</string>
+    <string name="booking_hospital">You have booked the hospital</string>
+    <string name="back_to_home">BACK TO HOME</string>
 </resources>

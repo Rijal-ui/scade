@@ -52,7 +52,7 @@ class CheckSkinActivity : AppCompatActivity() {
             binding.progressBar.visibility = View.GONE
             binding.tvCheckResult.text = result.data[0]
             binding.tvCheckResult.visibility = View.VISIBLE
-            binding.btnBooking.visibility = View.VISIBLE
+            //binding.btnBooking.visibility = View.VISIBLE
         })
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)

@@ -18,7 +18,7 @@ class BookingHospitalActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.title = getString(R.string.booking_a_hospital)
+        supportActionBar?.title = getString(R.string.booking)
 
         binding.btnSend.setOnClickListener {
             val intent = Intent(this, EndSplashActivity::class.java)
