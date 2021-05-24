@@ -1,22 +1,19 @@
 package com.bangkit.scade.data.source.remote
 
 import com.bangkit.scade.data.source.remote.response.ArticlesResponse
-import com.bangkit.scade.data.source.remote.response.HospitalResponse
+import com.bangkit.scade.data.source.remote.response.SessionResponse
 import com.bangkit.scade.data.source.remote.response.SkinImageResponse
 import com.bangkit.scade.service.ApiMLInterface
 import com.bangkit.scade.service.ApiBackendInterface
 import okhttp3.MultipartBody
 
-class RemoteDataSource constructor(
-    private val apiMLService: ApiMLInterface,
-    private val apiBackendService: ApiBackendInterface){
+class RemoteDataSource constructor(private val apiMLService: ApiMLInterface, private val apiBackendService: ApiBackendInterface){
 
     companion object {
         @Volatile
         private var instance: RemoteDataSource? = null
 
-        fun getInstance(apiMLService: ApiMLInterface, apiBackendService: ApiBackendInterface
-        ) : RemoteDataSource =
+        fun getInstance(apiMLService: ApiMLInterface, apiBackendService: ApiBackendInterface) : RemoteDataSource =
             instance ?: synchronized(this) {
                 RemoteDataSource(apiMLService,apiBackendService).apply { instance = this }
             }
@@ -34,8 +31,8 @@ class RemoteDataSource constructor(
         return apiBackendService.getArticleListIndonesia()
     }
 
-    suspend fun getListHospital(): HospitalResponse {
-        return apiBackendService.getListHospital()
+    suspend fun checkSession(token: String): SessionResponse {
+        return apiBackendService.checkSession(token)
     }
 
 }

@@ -12,5 +12,5 @@ data class DataEntity(
     var id: Int,
 
     @ColumnInfo(name = "tokenSession")
-    var tokenSection: String? = null
+    var tokenSection: String
 )

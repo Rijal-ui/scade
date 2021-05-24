@@ -2,13 +2,11 @@ package com.bangkit.scade.data.source.remote.response
 
 import com.google.gson.annotations.SerializedName
 
-data class SkinImageResponse(
-	@field:SerializedName("data")
-	val data: List<String>,
+data class SessionResponse(
 
 	@field:SerializedName("success")
-	val success: Boolean,
+	val success: Boolean? = null,
 
 	@field:SerializedName("message")
-	val message: String
+	val message: String? = null
 )

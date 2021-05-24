@@ -26,6 +26,11 @@
     <string name="password">Password</string>
     <string name="login">Login</string>
     <string name="register">Register</string>
+    <string name="error_message">Something went wrong</string>
+    <string name="name">Name</string>
+    <string name="address">Address</string>
+    <string name="retype_password">Retype Password</string>
+    <string name="session_end">Session expired, please login again</string>
     <string name="booking">BOOKING A HOSPITAL</string>
     <string name="send">SEND</string>
     <string name="booking_hospital">You have booked the hospital</string>
