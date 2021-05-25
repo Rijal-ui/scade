@@ -20,7 +20,7 @@ class CheckSplashActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         if (supportActionBar != null) {
-            supportActionBar?.hide();
+            supportActionBar?.hide()
         }
 
         handler = Handler(mainLooper)

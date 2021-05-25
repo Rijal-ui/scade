@@ -23,6 +23,4 @@ class InformationViewModel(val repository: Repository) : ViewModel() {
         }
     }
     var listArticle: LiveData<List<InformationEntity>> = _listArticle
-
-
 }

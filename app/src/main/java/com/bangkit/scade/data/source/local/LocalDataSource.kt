@@ -28,5 +28,4 @@ class LocalDataSource private constructor(private val dataDao: DataDao){
         val query = SimpleSQLiteQuery("SELECT EXISTS(SELECT * FROM session where id = $id)")
         return dataDao.checkDataExist(query)
     }
-
 }

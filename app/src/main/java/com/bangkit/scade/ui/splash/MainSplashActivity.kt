@@ -34,7 +34,6 @@ class MainSplashActivity : AppCompatActivity() {
         )[MainSplashViewModel::class.java]
 
         viewModel.session.observe(this, { result ->
-//            Log.d("inisessionmessage:", session)
             when (result.status) {
                 SUCCESS -> {
                     if (result.message != null) {
@@ -48,7 +47,6 @@ class MainSplashActivity : AppCompatActivity() {
                         .show()
                 }
             }
-
         })
 
         viewModel.checkExist().observe(this, {
@@ -62,7 +60,6 @@ class MainSplashActivity : AppCompatActivity() {
                         when (result.status) {
                             SUCCESS -> {
                                 session = result.message.toString()
-                                Log.d("inisession", session)
                             }
                             LOADING -> {
                             }
@@ -75,8 +72,6 @@ class MainSplashActivity : AppCompatActivity() {
                                     .show()
                             }
                         }
-
-
                     })
                 })
             }
@@ -86,7 +81,6 @@ class MainSplashActivity : AppCompatActivity() {
         handler = Handler(mainLooper)
         handler.postDelayed(
             {
-
                 if (exist) { //sudah pernah login
                     //check session expired atau tidak
                     //ambil token dari database
@@ -101,9 +95,9 @@ class MainSplashActivity : AppCompatActivity() {
                             Toast.LENGTH_SHORT
                         )
                             .show()
+                        //update local database
                         val intent = Intent(this, LoginActivity::class.java)
                         startActivity(intent)
-                        finish()
                     }
 
                 } else { //belum pernah login
@@ -114,7 +108,5 @@ class MainSplashActivity : AppCompatActivity() {
                 }
             }, 2000
         )
-
-
     }
 }
