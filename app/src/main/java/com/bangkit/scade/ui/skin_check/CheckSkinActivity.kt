@@ -55,6 +55,15 @@ class CheckSkinActivity : AppCompatActivity() {
         viewModel.resultCheckSkin.observe(this, { result ->
             when (result.status) {
                 SUCCESS -> {
+                    //LANJUTAN SETELAH CHECKSKIN BERHASIL
+                    //urutan logicnya diubah
+                    //setelah resultnya success nembak API diagnose/create
+                    //yg dikirim file, isi edittext, sama result.data.data[0]
+                    //jangan lupa error handlingnya
+                    //jika success response dari nembak API diagnose/create yg data disimpan ke variabel buat nanti dikirim waktu mau bookuing
+                    //setelah itu baru ngilangin progress bar, nampilin result, dan buttonnya
+                    //LANJUTAN INSTRUKSI ADA DI BUTTON BOOKING ON CLICK
+
                     result.data?.let { binding.tvCheckResult.text = result.data.data[0]}
                     binding.progressBar.visibility = View.GONE
                     binding.tvCheckResult.visibility = View.VISIBLE
@@ -86,13 +95,31 @@ class CheckSkinActivity : AppCompatActivity() {
         }
 
         binding.btnBooking.setOnClickListener {
+            //ngirim data variabel yg disimpan tadi lewat intent
             val intent = Intent(this, HospitalActivity::class.java)
             startActivity(intent)
         }
 
         binding.btnCheckSkin.setOnClickListener {
+            //check apakah edit text nya udah diisi atau belum
+            //jika sudah jalankan fungsi on click
+            //jika belum kasih toast harap diisi
+
+
             try {
                 if (file.exists()) {
+                    //nembak API check subscription
+
+                    //kalau hasilnya true maka langsung masuk check skin cancer
+
+                    //kalau hasilnya false munculin snackbar yg isinya pilihan buat nge snap sekali bayar atau daftar subscription, jangan lupa tambah opsi close buat batal
+
+                    //jika milih sekali bayar untuk 1 snap langsung jalanin checkskincancer
+
+                    //setelah checkskin jangan result yg di observe ↑↑↑↑↑↑↑ LANJUTAN BACA ATAS YG OBSERVE RESULT
+
+
+
                     binding.progressBar.visibility = View.VISIBLE
                     viewModel.checkSkinCancer(file)
 

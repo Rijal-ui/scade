@@ -13,6 +13,8 @@ import com.bangkit.scade.vo.Status
 
 class HospitalActivity : AppCompatActivity() {
 
+    //JANGAN LUPA DIBALIKAN SEARCHVIEW NYA
+
     private lateinit var viewModel: HospitalViewModel
     private lateinit var adapter: HospitalAdapter
     private lateinit var binding: ActivityHospitalBinding
@@ -22,6 +24,12 @@ class HospitalActivity : AppCompatActivity() {
 
         binding = ActivityHospitalBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        //ALURNYA GINI mungkin agak muter muter soalnya nge klik nya lewat item list nya jadi harus nyambungin intent extra di activity ke adapter
+        //search view nya jika diisi mulai nembak API hospital/search nya
+        //nanti tampilin bentuk list
+        //ketika di klik satu maka akan masuk ke halaman buat rujukan dengan intent yg ngirim id hospital sama data yg didapat dari intent extra activity sebelumnya
+
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = getString(R.string.splash_hospital_1)
