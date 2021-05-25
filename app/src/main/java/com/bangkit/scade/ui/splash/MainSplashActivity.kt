@@ -1,6 +1,8 @@
 package com.bangkit.scade.ui.splash
 
+import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
@@ -34,6 +36,7 @@ class MainSplashActivity : AppCompatActivity() {
         )[MainSplashViewModel::class.java]
 
         viewModel.session.observe(this, { result ->
+//            Log.d("inisessionmessage:", session)
             when (result.status) {
                 SUCCESS -> {
                     if (result.message != null) {
@@ -43,10 +46,17 @@ class MainSplashActivity : AppCompatActivity() {
                 LOADING -> {
                 }
                 Status.ERROR -> {
-                    Toast.makeText(this, getString(R.string.error_message), Toast.LENGTH_SHORT)
-                        .show()
+                    if (!isNetworkAvailable()) {
+                        val intent = Intent(this, HomeActivity::class.java)
+                        startActivity(intent)
+                    }
+                    else {
+                        Toast.makeText(this, getString(R.string.error_message), Toast.LENGTH_SHORT)
+                            .show()
+                    }
                 }
             }
+
         })
 
         viewModel.checkExist().observe(this, {
@@ -60,18 +70,21 @@ class MainSplashActivity : AppCompatActivity() {
                         when (result.status) {
                             SUCCESS -> {
                                 session = result.message.toString()
+                                Log.d("inisession", session)
                             }
                             LOADING -> {
                             }
                             Status.ERROR -> {
                                 Toast.makeText(
                                     this,
-                                    getString(R.string.error_message),
+                                    getString(R.string.error_internet),
                                     Toast.LENGTH_SHORT
                                 )
                                     .show()
                             }
                         }
+
+
                     })
                 })
             }
@@ -81,23 +94,26 @@ class MainSplashActivity : AppCompatActivity() {
         handler = Handler(mainLooper)
         handler.postDelayed(
             {
+
                 if (exist) { //sudah pernah login
                     //check session expired atau tidak
                     //ambil token dari database
-                    if (session.equals("fetch data successfully")) { //session masih oke
-                        val intent = Intent(this, HomeActivity::class.java)
-                        startActivity(intent)
-                        finish()
-                    } else { //session expired
-                        Toast.makeText(
-                            this,
-                            getString(R.string.session_end),
-                            Toast.LENGTH_SHORT
-                        )
-                            .show()
-                        //update local database
-                        val intent = Intent(this, LoginActivity::class.java)
-                        startActivity(intent)
+                    if (isNetworkAvailable()) {
+                        if (session.equals("fetch data successfully")) { //session masih oke
+                            val intent = Intent(this, HomeActivity::class.java)
+                            startActivity(intent)
+                            finish()
+                        } else { //session expired
+                            Toast.makeText(
+                                this,
+                                getString(R.string.session_end),
+                                Toast.LENGTH_SHORT
+                            )
+                                .show()
+                            val intent = Intent(this, LoginActivity::class.java)
+                            startActivity(intent)
+                            finish()
+                        }
                     }
 
                 } else { //belum pernah login
@@ -108,5 +124,13 @@ class MainSplashActivity : AppCompatActivity() {
                 }
             }, 2000
         )
+
+
+    }
+
+    fun isNetworkAvailable(): Boolean {
+        val connectManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val internetInfo = connectManager.activeNetworkInfo
+        return internetInfo != null && internetInfo.isConnected
     }
 }

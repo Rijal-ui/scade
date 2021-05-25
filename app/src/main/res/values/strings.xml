@@ -42,4 +42,5 @@
     <string name="password_not_valid">Less than 6 character</string>
     <string name="error_login">Wrong Email or Password</string>
     <string name="double_tap_message">Please click BACK again to exit</string>
+    <string name="error_internet">You don\'t have an internet connection</string>
 </resources>
