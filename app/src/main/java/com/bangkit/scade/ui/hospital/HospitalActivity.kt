@@ -65,4 +65,9 @@ class HospitalActivity : AppCompatActivity() {
             }
         })
     }
+
+    companion object {
+        val EXTRA_ID_DIAGNOSE = "extra_id_diagnose"
+    }
+
 }

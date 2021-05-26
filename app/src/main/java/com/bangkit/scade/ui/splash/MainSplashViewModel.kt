@@ -24,7 +24,7 @@ class MainSplashViewModel(val repository: Repository) : ViewModel() {
     }
 
 
-    fun setDataSession(): LiveData<DataEntity> {
+    fun setSession(): LiveData<DataEntity> {
         return repository.getDataCheck()
     }
 

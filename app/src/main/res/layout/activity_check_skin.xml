@@ -52,7 +52,7 @@
         android:layout_marginEnd="16dp"
         android:text="@string/result"
         android:textColor="@color/black"
-        android:textSize="14sp"
+        android:textSize="18sp"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/tv_spot"

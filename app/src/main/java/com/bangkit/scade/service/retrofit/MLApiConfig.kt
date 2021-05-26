@@ -4,7 +4,7 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class ArticleApiConfig {
+class MLApiConfig {
     companion object {
         @Volatile
         private var retrofit: Retrofit? = null
@@ -13,7 +13,7 @@ class ArticleApiConfig {
                 .build()
             return retrofit ?: synchronized(this) {
                 retrofit ?: Retrofit.Builder()
-                    .baseUrl("http://35.213.130.133:8080/")
+                    .baseUrl("http://35.213.130.133:8008/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .client(client)
                     .build()

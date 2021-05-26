@@ -16,6 +16,7 @@ class LocalDataSource private constructor(private val dataDao: DataDao){
 
     fun getDataCheck(): LiveData<DataEntity> = dataDao.getDataCheck()
 
+
     fun insertDataCheck(data: DataEntity) {
         dataDao.insert(data)
     }

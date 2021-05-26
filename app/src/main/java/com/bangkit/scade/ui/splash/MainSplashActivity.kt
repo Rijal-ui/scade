@@ -35,61 +35,41 @@ class MainSplashActivity : AppCompatActivity() {
             factory
         )[MainSplashViewModel::class.java]
 
-        viewModel.session.observe(this, { result ->
-//            Log.d("inisessionmessage:", session)
-            when (result.status) {
-                SUCCESS -> {
-                    if (result.message != null) {
-                        session = result.message
-                    }
-                }
-                LOADING -> {
-                }
-                Status.ERROR -> {
-                    if (!isNetworkAvailable()) {
-                        val intent = Intent(this, HomeActivity::class.java)
-                        startActivity(intent)
-                    }
-                    else {
-                        Toast.makeText(this, getString(R.string.error_message), Toast.LENGTH_SHORT)
-                            .show()
-                    }
-                }
-            }
-
-        })
-
         viewModel.checkExist().observe(this, {
             exist = it
+            Log.d("inicheckexist", exist.toString())
             if (exist) {
-                viewModel.setDataSession().observe(this, { entity ->
+                viewModel.setSession().observe(this, { entity ->
                     token = entity.tokenSection
                     Log.d("inichecktokenac", entity.tokenSection)
                     viewModel.checkSession(token)
-                    viewModel.session.observe(this, { result ->
-                        when (result.status) {
-                            SUCCESS -> {
-                                session = result.message.toString()
-                                Log.d("inisession", session)
-                            }
-                            LOADING -> {
-                            }
-                            Status.ERROR -> {
-                                Toast.makeText(
-                                    this,
-                                    getString(R.string.error_internet),
-                                    Toast.LENGTH_SHORT
-                                )
-                                    .show()
-                            }
-                        }
-
-
-                    })
+//                    viewModel.session.observe(this, { result ->
+//                        when (result.status) {
+//                            SUCCESS -> {
+////                                session = result.message.toString()
+//                                session = result
+//                                Log.d("inisession", session)
+//                            }
+//                            LOADING -> {
+//                            }
+//                            Status.ERROR -> {
+//                                Toast.makeText(
+//                                    this,
+//                                    getString(R.string.error_message),
+//                                    Toast.LENGTH_SHORT
+//                                )
+//                                    .show()
+//                            }
+//                        }
+//                    })
                 })
             }
 
         })
+
+
+
+
 
         handler = Handler(mainLooper)
         handler.postDelayed(
@@ -99,10 +79,35 @@ class MainSplashActivity : AppCompatActivity() {
                     //check session expired atau tidak
                     //ambil token dari database
                     if (isNetworkAvailable()) {
-                        if (session.equals("fetch data successfully")) { //session masih oke
+                        viewModel.session.observe(this, { result ->
+                            when (result.status) {
+                                SUCCESS -> {
+                                    if (result.data?.message != null) {
+                                        session = result.data.message
+                                        Log.d("inisession", session)
+                                    }
+                                }
+                                LOADING -> {
+                                }
+                                Status.ERROR -> {
+                                    if (!isNetworkAvailable()) {
+                                        val intent = Intent(this, HomeActivity::class.java)
+                                        startActivity(intent)
+                                    } else {
+                                        Toast.makeText(
+                                            this,
+                                            getString(R.string.error_message),
+                                            Toast.LENGTH_SHORT
+                                        )
+                                            .show()
+                                    }
+                                }
+                            }
+
+                        })
+                        if (session == "fetch data successfully") { //session masih oke
                             val intent = Intent(this, HomeActivity::class.java)
                             startActivity(intent)
-                            finish()
                         } else { //session expired
                             Toast.makeText(
                                 this,
@@ -112,7 +117,6 @@ class MainSplashActivity : AppCompatActivity() {
                                 .show()
                             val intent = Intent(this, LoginActivity::class.java)
                             startActivity(intent)
-                            finish()
                         }
                     }
 
@@ -128,7 +132,7 @@ class MainSplashActivity : AppCompatActivity() {
 
     }
 
-    fun isNetworkAvailable(): Boolean {
+    private fun isNetworkAvailable(): Boolean {
         val connectManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val internetInfo = connectManager.activeNetworkInfo
         return internetInfo != null && internetInfo.isConnected
