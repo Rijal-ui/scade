@@ -107,7 +107,6 @@ class Repository constructor(
         return listHospital
     }
 
-
     override suspend fun checkSession(token: String): SessionResponse {
         return withContext(Dispatchers.IO) { remoteDataSource.checkSession(token) }
     }

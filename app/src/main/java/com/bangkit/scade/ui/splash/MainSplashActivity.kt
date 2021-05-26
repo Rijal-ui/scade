@@ -3,6 +3,7 @@ package com.bangkit.scade.ui.splash
 import android.content.Context
 import android.content.Intent
 import android.net.ConnectivityManager
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
@@ -46,7 +47,7 @@ class MainSplashActivity : AppCompatActivity() {
                 LOADING -> {
                 }
                 Status.ERROR -> {
-                    if (!isNetworkAvailable()) {
+                    if (isNetworkAvailable()) {
                         val intent = Intent(this, HomeActivity::class.java)
                         startActivity(intent)
                     }
