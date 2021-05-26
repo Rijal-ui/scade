@@ -3,6 +3,7 @@ package com.bangkit.scade.data.source
 import androidx.lifecycle.LiveData
 import com.bangkit.scade.data.source.local.LocalDataSource
 import com.bangkit.scade.data.source.local.entity.DataEntity
+import com.bangkit.scade.data.source.local.entity.DiagnosesEntity
 import com.bangkit.scade.data.source.local.entity.HospitalEntity
 import com.bangkit.scade.data.source.local.entity.InformationEntity
 import com.bangkit.scade.data.source.remote.RemoteDataSource
@@ -13,6 +14,8 @@ import kotlinx.coroutines.withContext
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.File
 
 class Repository constructor(
@@ -86,7 +89,7 @@ class Repository constructor(
     }
 
     override suspend fun getListHospital(): List<HospitalEntity> {
-        val result = withContext(Dispatchers.IO) { (remoteDataSource.getListHospital())}
+        val result = withContext(Dispatchers.IO) { (remoteDataSource.getListHospital()) }
         val listHospital = ArrayList<HospitalEntity>()
         result.data?.forEach { response ->
             if (response != null) {
@@ -112,11 +115,34 @@ class Repository constructor(
     }
 
     override suspend fun login(loginData: LoginRequest): LoginResponse {
-        return withContext(Dispatchers.IO) {remoteDataSource.login(loginData)}
+        return withContext(Dispatchers.IO) { remoteDataSource.login(loginData) }
     }
 
     override suspend fun register(registerData: RegisterRequest): RegisterResponse {
-        return withContext(Dispatchers.IO) {remoteDataSource.register(registerData)}
+        return withContext(Dispatchers.IO) { remoteDataSource.register(registerData) }
+    }
+
+
+    override suspend fun createDiagnoses(
+        token: String,
+        name: String,
+        image: File,
+        position: String
+    ): DiagnosesEntity {
+
+        val result = withContext(Dispatchers.IO) {
+            val cancerName = name.toRequestBody("text/plain".toMediaTypeOrNull())
+            val payload = RequestBody.create("image/*".toMediaTypeOrNull(), image)
+            val position = position.toRequestBody("text/plain".toMediaTypeOrNull())
+            val image = MultipartBody.Part.createFormData("cancer_image", image.name, payload)
+            remoteDataSource.createDiagnoses(
+                token,
+                cancerName,
+                image,
+                position
+            )
+        }
+        return DiagnosesEntity(result.data)
     }
 
 

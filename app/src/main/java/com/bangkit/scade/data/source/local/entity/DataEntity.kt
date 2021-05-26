@@ -6,7 +6,6 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "session")
 data class DataEntity(
-
     @PrimaryKey
     @ColumnInfo(name = "id")
     var id: Int,

@@ -1,10 +1,9 @@
 package com.bangkit.scade.service
 
 import com.bangkit.scade.data.source.remote.response.*
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.POST
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import retrofit2.http.*
 
 interface ApiBackendInterface {
     @GET("articles/english")
@@ -26,4 +25,13 @@ interface ApiBackendInterface {
 
     @POST("auth/sign_up")
     suspend fun register(@Body registerData: RegisterRequest): RegisterResponse
+
+    @Multipart
+    @POST("diagnoses/create")
+    suspend fun createDiagnoses(
+        @Header("Authorization") token: String,
+        @Part("cancer_name") cancerName: RequestBody,
+        @Part image: MultipartBody.Part,
+        @Part("position") position: RequestBody
+    ): DiagnosesResponse
 }

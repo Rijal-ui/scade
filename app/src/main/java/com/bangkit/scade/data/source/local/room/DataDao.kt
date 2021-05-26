@@ -11,6 +11,8 @@ interface DataDao {
     @Query("SELECT * FROM session")
     fun getDataCheck(): LiveData<DataEntity>
 
+
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(data: DataEntity)
 

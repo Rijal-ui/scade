@@ -1,19 +1,26 @@
 package com.bangkit.scade.data.source.remote
 
 import com.bangkit.scade.data.source.remote.response.*
-import com.bangkit.scade.service.ApiMLInterface
 import com.bangkit.scade.service.ApiBackendInterface
+import com.bangkit.scade.service.ApiMLInterface
 import okhttp3.MultipartBody
+import okhttp3.RequestBody
 
-class RemoteDataSource constructor(private val apiMLService: ApiMLInterface, private val apiBackendService: ApiBackendInterface){
+class RemoteDataSource constructor(
+    private val apiMLService: ApiMLInterface,
+    private val apiBackendService: ApiBackendInterface
+) {
 
     companion object {
         @Volatile
         private var instance: RemoteDataSource? = null
 
-        fun getInstance(apiMLService: ApiMLInterface, apiBackendService: ApiBackendInterface) : RemoteDataSource =
+        fun getInstance(
+            apiMLService: ApiMLInterface,
+            apiBackendService: ApiBackendInterface
+        ): RemoteDataSource =
             instance ?: synchronized(this) {
-                RemoteDataSource(apiMLService,apiBackendService).apply { instance = this }
+                RemoteDataSource(apiMLService, apiBackendService).apply { instance = this }
             }
     }
 
@@ -22,7 +29,7 @@ class RemoteDataSource constructor(private val apiMLService: ApiMLInterface, pri
     }
 
     suspend fun getListEnglish(): ArticlesResponse {
-        return  apiBackendService.getArticleListEnglish()
+        return apiBackendService.getArticleListEnglish()
     }
 
     suspend fun getListIndonesia(): ArticlesResponse {
@@ -41,7 +48,16 @@ class RemoteDataSource constructor(private val apiMLService: ApiMLInterface, pri
         return apiBackendService.login(loginData)
     }
 
-    suspend fun register(registerData: RegisterRequest) : RegisterResponse {
+    suspend fun register(registerData: RegisterRequest): RegisterResponse {
         return apiBackendService.register(registerData)
+    }
+
+    suspend fun createDiagnoses(
+        token: String,
+        cancerName: RequestBody,
+        image: MultipartBody.Part,
+        position: RequestBody
+    ): DiagnosesResponse {
+        return apiBackendService.createDiagnoses(token, cancerName, image, position)
     }
 }
