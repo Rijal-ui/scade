@@ -44,4 +44,10 @@
     <string name="double_tap_message">Please click BACK again to exit</string>
     <string name="error_internet">You don\'t have an internet connection</string>
     <string name="edit_text_empy_error">Field cannot be blank</string>
+    <string name="name_spot">Name Spot</string>
+    <string name="cancer_diagnosed">Cancer diagnosed</string>
+    <string name="name_cancer">Name Cancer</string>
+    <string name="hospital">Hospital</string>
+    <string name="name_hospital">Name Hospital</string>
+    <string name="location">Location</string>
 </resources>

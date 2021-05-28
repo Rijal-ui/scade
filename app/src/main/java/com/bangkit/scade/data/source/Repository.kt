@@ -2,10 +2,7 @@ package com.bangkit.scade.data.source
 
 import androidx.lifecycle.LiveData
 import com.bangkit.scade.data.source.local.LocalDataSource
-import com.bangkit.scade.data.source.local.entity.DataEntity
-import com.bangkit.scade.data.source.local.entity.DiagnosesEntity
-import com.bangkit.scade.data.source.local.entity.HospitalEntity
-import com.bangkit.scade.data.source.local.entity.InformationEntity
+import com.bangkit.scade.data.source.local.entity.*
 import com.bangkit.scade.data.source.remote.RemoteDataSource
 import com.bangkit.scade.data.source.remote.response.*
 import com.bangkit.scade.utils.AppExecutors
@@ -110,8 +107,61 @@ class Repository constructor(
         return listHospital
     }
 
+    override suspend fun getSearchHospital(query: String): List<HospitalEntity> {
+        val result = withContext(Dispatchers.IO) { (remoteDataSource.getSearchHospital(query)) }
+        val listHospital = ArrayList<HospitalEntity>()
+        result.data?.forEach { response ->
+            if (response != null) {
+                val hospital = HospitalEntity(
+                    id = response.id,
+                    name = response.name,
+                    address = response.address,
+                    phone = response.phone,
+                    city = response.city,
+                    province = response.province,
+                    createdAt = response.createdAt,
+                    deletedAt = response.deletedAt,
+                    updatedAt = response.updatedAt
+                )
+                listHospital.add(hospital)
+            }
+        }
+        return listHospital
+    }
+
     override suspend fun checkSession(token: String): SessionResponse {
         return withContext(Dispatchers.IO) { remoteDataSource.checkSession(token) }
+    }
+
+    override suspend fun getDetailDiagnoses(id: Int): GetDiagnosesEntity {
+        val result = remoteDataSource.getDetailDiagnoses(id)
+        return GetDiagnosesEntity(
+            id = result.data?.iD,
+            cancerName = result.data?.cancerName,
+            cancerImage = result.data?.cancerImage,
+            position = result.data?.position,
+            price = result.data?.price,
+            user_id = result.data?.userId,
+            invoices = result.data?.invoices,
+            createdAt = result.data?.createdAt,
+            updatedAt = result.data?.updatedAt,
+            deletedAt = result.data?.deletedAt
+        )
+    }
+
+    override suspend fun getDetailHospital(id: Int): HospitalEntity {
+        val result = remoteDataSource.getDetailHospital(id)
+        return HospitalEntity(
+            id = result.data?.iD,
+            name = result.data?.name,
+            address = result.data?.address,
+            phone = result.data?.phone,
+            city = result.data?.city,
+            province = result.data?.province,
+            createdAt = result.data?.createdAt,
+            updatedAt = result.data?.updatedAt,
+            deletedAt = result.data?.deletedAt
+        )
     }
 
     override suspend fun login(loginData: LoginRequest): LoginResponse {

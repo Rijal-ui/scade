@@ -28,4 +28,12 @@ class HospitalViewModel(val repository: Repository) : ViewModel() {
             _listHospital.postValue(Resource.success(result))
         }
     }
+
+    fun setSearchHospital(search: String) {
+        viewModelScope.launch(exceptionHandler) {
+            _listHospital.postValue(Resource.loading(null))
+            val result = repository.getSearchHospital(search)
+            _listHospital.postValue(Resource.success(result))
+        }
+    }
 }
