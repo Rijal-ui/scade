@@ -25,6 +25,8 @@ interface DataSource {
 
     suspend fun getDetailHospital(id: Int): HospitalEntity
 
+    suspend fun createInvoice(token: String, invoiceData: InvoiceRequest): InvoiceResponse
+
     suspend fun login(loginData: LoginRequest): LoginResponse
 
     suspend fun register(registerData: RegisterRequest): RegisterResponse

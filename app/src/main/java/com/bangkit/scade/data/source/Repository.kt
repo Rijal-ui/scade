@@ -133,7 +133,7 @@ class Repository constructor(
     }
 
     override suspend fun getDetailDiagnoses(token: String, id: Int): GetDiagnosesEntity {
-        val result = remoteDataSource.getDetailDiagnoses(token, id)
+        val result = withContext(Dispatchers.IO) { remoteDataSource.getDetailDiagnoses(token, id) }
         return GetDiagnosesEntity(
             id = result.data?.iD,
             cancerName = result.data?.cancerName,
@@ -144,7 +144,7 @@ class Repository constructor(
     }
 
     override suspend fun getDetailHospital(id: Int): HospitalEntity {
-        val result = remoteDataSource.getDetailHospital(id)
+        val result = withContext(Dispatchers.IO) { remoteDataSource.getDetailHospital(id) }
         return HospitalEntity(
             id = result.data?.iD,
             name = result.data?.name,
@@ -156,6 +156,13 @@ class Repository constructor(
             updatedAt = result.data?.updatedAt,
             deletedAt = result.data?.deletedAt
         )
+    }
+
+    override suspend fun createInvoice(
+        token: String,
+        invoiceData: InvoiceRequest
+    ): InvoiceResponse {
+        return withContext(Dispatchers.IO) { remoteDataSource.createInvoice(token, invoiceData) }
     }
 
     override suspend fun login(loginData: LoginRequest): LoginResponse {

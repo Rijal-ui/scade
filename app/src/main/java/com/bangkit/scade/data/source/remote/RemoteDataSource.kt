@@ -56,6 +56,10 @@ class RemoteDataSource constructor(
         return apiBackendService.getDetailHospital(id)
     }
 
+    suspend fun createInvoice(token: String, invoiceData: InvoiceRequest): InvoiceResponse {
+        return apiBackendService.createInvoice(token, invoiceData)
+    }
+
     suspend fun login(loginData: LoginRequest): LoginResponse {
         return apiBackendService.login(loginData)
     }

@@ -88,34 +88,6 @@ class CheckSkinActivity : AppCompatActivity() {
                             })
                         }
                     })
-//                    viewModel.session.observe(this, { session ->
-//                        result.data?.let {
-//                            viewModel.createDiagnoses(
-//                                session,
-//                                result.data.data[0],
-//                                file,
-//                                binding.edtSpot.text.toString().trim()
-//                            )
-//                            viewModel.idDiagonse.observe(this, { diagnoses ->
-//                                when (diagnoses.status) {
-//                                    SUCCESS -> {
-//                                        idDiagnoses = diagnoses.data?.data!!
-//                                        result.data.let {
-//                                            binding.tvCheckResult.text = result.data.data[0]
-//                                            binding.progressBar.visibility = View.GONE
-//                                            binding.tvCheckResult.visibility = View.VISIBLE
-//                                            binding.btnBooking.visibility = View.VISIBLE
-//                                        }
-//                                    }
-//                                    LOADING -> {
-//                                        binding.progressBar.visibility = View.VISIBLE
-//                                    }
-//                                    ERROR -> {
-//                                    }
-//                                }
-//                            })
-//                        }
-//                    })
 
                 }
                 LOADING -> {

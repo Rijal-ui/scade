@@ -34,6 +34,12 @@ interface ApiBackendInterface {
     @GET("hospitals/{ID}")
     suspend fun getDetailHospital(@Path("ID") id: Int): HospitalByIdResponse
 
+    @POST("invoices/create")
+    suspend fun createInvoice(
+        @Header("Authorization") token: String,
+        @Body invoiceData: InvoiceRequest
+    ): InvoiceResponse
+
     @POST("auth/sign_in")
     suspend fun login(@Body loginData: LoginRequest): LoginResponse
 
