@@ -5,6 +5,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.bangkit.scade.R
 import com.bangkit.scade.data.source.local.entity.GetDiagnosesEntity
 import com.bangkit.scade.data.source.local.entity.HospitalEntity
 import com.bangkit.scade.databinding.ActivityDetailHospitalBinding
@@ -29,6 +30,9 @@ class DetailHospitalActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.title = getString(R.string.booking)
 
         binding = ActivityDetailHospitalBinding.inflate(layoutInflater)
         setContentView(binding.root)
