@@ -46,6 +46,10 @@ class DetailHospitalActivity : AppCompatActivity() {
                 idDiagnose = extras.getInt(EXTRA_ID_DIAGNOSE)
                 idHospital = extras.getInt(EXTRA_ID_HOSPITAL)
 
+                binding.btnCreateBooking.setOnClickListener {
+
+                }
+
                 viewModel.getDataDiagnose(token, idDiagnose)
                 viewModel.getDataHospital(idHospital)
 
@@ -53,9 +57,6 @@ class DetailHospitalActivity : AppCompatActivity() {
                     when (result.status) {
                         SUCCESS -> {
                             populateDataDiagnose(result)
-                            result.data?.let {
-                                Log.d("diagnosecheck", result.data.cancerName.toString())
-                            }
                         }
                         LOADING -> {
                         }
@@ -93,8 +94,6 @@ class DetailHospitalActivity : AppCompatActivity() {
                 })
             }
         })
-
-
     }
 
     private fun populateDataHospital(data: Resource<HospitalEntity>) {

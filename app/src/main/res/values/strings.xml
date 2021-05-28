@@ -50,4 +50,5 @@
     <string name="hospital">Hospital</string>
     <string name="name_hospital">Name Hospital</string>
     <string name="location">Location</string>
+    <string name="create_booking">Create Booking</string>
 </resources>
