@@ -18,8 +18,9 @@ class DetailHospitalActivity : AppCompatActivity() {
     private lateinit var viewModel: DetailHospitalViewModel
     private lateinit var detailHospital: Resource<HospitalEntity>
     private lateinit var detailDiagnose: Resource<GetDiagnosesEntity>
+    private var idDiagnose: Int = 1
+    private var idHospital: Int = 1
     private var token: String = ""
-    private var diagnose: String = ""
 
     companion object {
         const val EXTRA_ID_HOSPITAL = "extra_id_hospital"
@@ -42,15 +43,11 @@ class DetailHospitalActivity : AppCompatActivity() {
             token = tokenSession.tokenSession
             val extras = intent.extras
             if (extras != null) {
-                val idDiagnose = extras.getInt(EXTRA_ID_DIAGNOSE)
-                Log.d("iniiddiagnose", idDiagnose.toString())
-//            val idHospital = extras.getInt(EXTRA_ID_HOSPITAL)
+                idDiagnose = extras.getInt(EXTRA_ID_DIAGNOSE)
+                idHospital = extras.getInt(EXTRA_ID_HOSPITAL)
 
                 viewModel.getDataDiagnose(token, idDiagnose)
-                Log.d("token", token)
-                Log.d("idDiagnose", idDiagnose.toString())
-//            viewModel.getDataHospital(idHospital)
-//            Log.d("idhospital", idHospital.toString())
+                viewModel.getDataHospital(idHospital)
 
                 viewModel.dataDiagnose.observe(this, { result ->
                     when (result.status) {
@@ -73,30 +70,29 @@ class DetailHospitalActivity : AppCompatActivity() {
                     }
                 })
 
-//            viewModel.dataHospital.observe(this, { result ->
-//                when(result.status) {
-//                    SUCCESS -> {
-//                        binding.tvNameHospital.text = result.data?.name
-//                        binding.tvLocationHospital.text = result.data?.province
-////                        detailHospital = result
-////                        populateDataHospital(result)
-//                    }
-//                    LOADING -> {
-//                    }
-//                    ERROR -> {
-//                        Toast.makeText(
-//                            this,
-//                            "Wrong Hospital",
-//                            Toast.LENGTH_SHORT
-//                        )
-//                            .show()
-//                    }
-//
-//                }
-//            })
+                viewModel.dataHospital.observe(this, { result ->
+                    when (result.status) {
+                        SUCCESS -> {
+                            binding.tvNameHospital.text = result.data?.name
+                            binding.tvLocationHospital.text = result.data?.province
+//                        detailHospital = result
+//                        populateDataHospital(result)
+                        }
+                        LOADING -> {
+                        }
+                        ERROR -> {
+                            Toast.makeText(
+                                this,
+                                "Wrong Hospital",
+                                Toast.LENGTH_SHORT
+                            )
+                                .show()
+                        }
+
+                    }
+                })
             }
         })
-        Log.d("thisToken", token)
 
 
     }
