@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bangkit.scade.data.source.local.entity.HospitalEntity
 import com.bangkit.scade.databinding.ItemListHospitalBinding
-import com.bangkit.scade.ui.hospital.detail_hospital.DetailHospitalActivity
+import com.bangkit.scade.ui.hospital.detail_hospital.BookingHospitalActivity
 
 class HospitalAdapter : RecyclerView.Adapter<HospitalAdapter.ViewHolder>() {
 
@@ -27,9 +27,9 @@ class HospitalAdapter : RecyclerView.Adapter<HospitalAdapter.ViewHolder>() {
                     tvHospitalLocation.text = hospital.address
 
                     itemView.setOnClickListener {
-                        val intent = Intent(itemView.context, DetailHospitalActivity::class.java).apply {
-                            putExtra(DetailHospitalActivity.EXTRA_ID_HOSPITAL, hospital.id)
-                            putExtra(DetailHospitalActivity.EXTRA_ID_DIAGNOSE, idDiagnose)
+                        val intent = Intent(itemView.context, BookingHospitalActivity::class.java).apply {
+                            putExtra(BookingHospitalActivity.EXTRA_ID_HOSPITAL, hospital.id)
+                            putExtra(BookingHospitalActivity.EXTRA_ID_DIAGNOSE, idDiagnose)
                         }
                         it.context.startActivity(intent)
                     }

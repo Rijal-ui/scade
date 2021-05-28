@@ -8,15 +8,16 @@ import androidx.lifecycle.ViewModelProvider
 import com.bangkit.scade.R
 import com.bangkit.scade.data.source.local.entity.GetDiagnosesEntity
 import com.bangkit.scade.data.source.local.entity.HospitalEntity
-import com.bangkit.scade.databinding.ActivityDetailHospitalBinding
+import com.bangkit.scade.data.source.remote.response.InvoiceRequest
+import com.bangkit.scade.databinding.ActivityBookingHospitalBinding
 import com.bangkit.scade.viewmodel.ViewModelFactory
 import com.bangkit.scade.vo.Resource
 import com.bangkit.scade.vo.Status.*
 
-class DetailHospitalActivity : AppCompatActivity() {
+class BookingHospitalActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityDetailHospitalBinding
-    private lateinit var viewModel: DetailHospitalViewModel
+    private lateinit var binding: ActivityBookingHospitalBinding
+    private lateinit var viewModel: BookingHospitalViewModel
     private lateinit var detailHospital: Resource<HospitalEntity>
     private lateinit var detailDiagnose: Resource<GetDiagnosesEntity>
     private var idDiagnose: Int = 1
@@ -34,14 +35,14 @@ class DetailHospitalActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = getString(R.string.booking)
 
-        binding = ActivityDetailHospitalBinding.inflate(layoutInflater)
+        binding = ActivityBookingHospitalBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val factory = ViewModelFactory.getInstance(this)
         viewModel = ViewModelProvider(
             this,
             factory
-        )[DetailHospitalViewModel::class.java]
+        )[BookingHospitalViewModel::class.java]
 
         viewModel.getSession().observe(this, { tokenSession ->
             token = tokenSession.tokenSession
@@ -51,6 +52,15 @@ class DetailHospitalActivity : AppCompatActivity() {
                 idHospital = extras.getInt(EXTRA_ID_HOSPITAL)
 
                 binding.btnCreateBooking.setOnClickListener {
+                    val invoiceData = InvoiceRequest(
+                        hospital_id = idHospital,
+                        diagnose_id = idDiagnose
+                    )
+
+                    viewModel.createInvoice(token, invoiceData)
+
+                    Log.d("dignose_id", invoiceData.diagnose_id.toString())
+
 
                 }
 
@@ -94,6 +104,19 @@ class DetailHospitalActivity : AppCompatActivity() {
                                 .show()
                         }
 
+                    }
+                })
+                viewModel.invoice.observe(this, { result ->
+                    when (result.status) {
+                        SUCCESS -> {
+                            Toast.makeText(this, result.message, Toast.LENGTH_SHORT).show()
+                        }
+                        LOADING -> {
+
+                        }
+                        ERROR -> {
+                            Toast.makeText(this, "fail to book", Toast.LENGTH_SHORT).show()
+                        }
                     }
                 })
             }

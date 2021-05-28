@@ -158,8 +158,11 @@ class Repository constructor(
         )
     }
 
-    override suspend fun createInvoice(invoiceData: InvoiceRequest): InvoiceResponse {
-        return withContext(Dispatchers.IO) { remoteDataSource.createInvoice(invoiceData) }
+    override suspend fun createInvoice(
+        token: String,
+        invoiceData: InvoiceRequest
+    ): InvoiceResponse {
+        return withContext(Dispatchers.IO) { remoteDataSource.createInvoice(token, invoiceData) }
     }
 
     override suspend fun login(loginData: LoginRequest): LoginResponse {
