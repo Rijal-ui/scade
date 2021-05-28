@@ -27,7 +27,7 @@ class CheckSplashActivity : AppCompatActivity() {
         handler.postDelayed(
             {
                 binding.btnCheckStart.visibility = View.VISIBLE
-            }, 2000
+            }, 1000
         )
 
         binding.btnCheckStart.setOnClickListener {

@@ -1,6 +1,5 @@
 package com.bangkit.scade.data.source.remote
 
-import com.bangkit.scade.data.source.local.entity.HospitalEntity
 import com.bangkit.scade.data.source.remote.response.*
 import com.bangkit.scade.service.ApiBackendInterface
 import com.bangkit.scade.service.ApiMLInterface
@@ -49,8 +48,8 @@ class RemoteDataSource constructor(
         return apiBackendService.checkSession(token)
     }
 
-    suspend fun getDetailDiagnoses(id: Int): DiagnosesByIdResponse {
-        return apiBackendService.getDetailDiagnoses(id)
+    suspend fun getDetailDiagnoses(token: String, id: Int): DiagnosesByIdResponse {
+        return apiBackendService.getDetailDiagnoses(token, id)
     }
 
     suspend fun getDetailHospital(id: Int): HospitalByIdResponse {

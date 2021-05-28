@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 data class DiagnosesByIdResponse(
 
 	@field:SerializedName("data")
-	val data: DataDiagnose? = null,
+	val data: Data? = null,
 
 	@field:SerializedName("success")
 	val success: Boolean? = null,
@@ -14,16 +14,7 @@ data class DiagnosesByIdResponse(
 	val message: String? = null
 )
 
-data class DataDiagnose(
-
-	@field:SerializedName("invoices")
-	val invoices: Any? = null,
-
-	@field:SerializedName("user_id")
-	val userId: Int? = null,
-
-	@field:SerializedName("price")
-	val price: Int? = null,
+data class Data(
 
 	@field:SerializedName("CreatedAt")
 	val createdAt: String? = null,
@@ -38,11 +29,5 @@ data class DataDiagnose(
 	val iD: Int? = null,
 
 	@field:SerializedName("position")
-	val position: String? = null,
-
-	@field:SerializedName("DeletedAt")
-	val deletedAt: Any? = null,
-
-	@field:SerializedName("UpdatedAt")
-	val updatedAt: String? = null
+	val position: String? = null
 )

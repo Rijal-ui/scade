@@ -11,7 +11,6 @@ import kotlinx.coroutines.withContext
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.File
 
@@ -133,19 +132,14 @@ class Repository constructor(
         return withContext(Dispatchers.IO) { remoteDataSource.checkSession(token) }
     }
 
-    override suspend fun getDetailDiagnoses(id: Int): GetDiagnosesEntity {
-        val result = remoteDataSource.getDetailDiagnoses(id)
+    override suspend fun getDetailDiagnoses(token: String, id: Int): GetDiagnosesEntity {
+        val result = remoteDataSource.getDetailDiagnoses(token, id)
         return GetDiagnosesEntity(
             id = result.data?.iD,
             cancerName = result.data?.cancerName,
             cancerImage = result.data?.cancerImage,
             position = result.data?.position,
-            price = result.data?.price,
-            user_id = result.data?.userId,
-            invoices = result.data?.invoices,
-            createdAt = result.data?.createdAt,
-            updatedAt = result.data?.updatedAt,
-            deletedAt = result.data?.deletedAt
+            createdAt = result.data?.createdAt
         )
     }
 
@@ -196,8 +190,8 @@ class Repository constructor(
     }
 
 
-    override fun getDataCheck(): LiveData<DataEntity> {
-        return localDataSource.getDataCheck()
+    override fun getSessionToken(): LiveData<DataEntity> {
+        return localDataSource.getSessionToken()
     }
 
     override fun addDataCheck(data: DataEntity) {

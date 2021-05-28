@@ -21,7 +21,7 @@ interface DataSource {
 
     suspend fun checkSession(token: String): SessionResponse
 
-    suspend fun getDetailDiagnoses(id: Int): GetDiagnosesEntity
+    suspend fun getDetailDiagnoses(token: String, id: Int): GetDiagnosesEntity
 
     suspend fun getDetailHospital(id: Int): HospitalEntity
 
@@ -36,7 +36,7 @@ interface DataSource {
         position: String
     ): DiagnosesEntity
 
-    fun getDataCheck(): LiveData<DataEntity>
+    fun getSessionToken(): LiveData<DataEntity>
 
 
     fun addDataCheck(data: DataEntity)

@@ -32,7 +32,7 @@ class CheckSkinViewModel(private val repository: Repository) : ViewModel() {
     }
 
     fun getSession(): LiveData<DataEntity> {
-        return repository.getDataCheck()
+        return repository.getSessionToken()
     }
 
 

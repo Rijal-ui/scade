@@ -5,7 +5,6 @@ import android.content.Intent
 import android.net.ConnectivityManager
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -37,11 +36,11 @@ class MainSplashActivity : AppCompatActivity() {
 
         viewModel.checkExist().observe(this, {
             exist = it
-            Log.d("inicheckexist", exist.toString())
+//            Log.d("inicheckexist", exist.toString())
             if (exist) {
                 viewModel.setSession().observe(this, { entity ->
-                    token = entity.tokenSection
-                    Log.d("inichecktokenac", entity.tokenSection)
+                    token = entity.tokenSession
+//                    Log.d("inichecktokenac", entity.tokenSession)
                     viewModel.checkSession(token)
 //                    viewModel.session.observe(this, { result ->
 //                        when (result.status) {
@@ -84,7 +83,7 @@ class MainSplashActivity : AppCompatActivity() {
                                 SUCCESS -> {
                                     if (result.data?.message != null) {
                                         session = result.data.message
-                                        Log.d("inisession", session)
+//                                        Log.d("inisession", session)
                                     }
                                 }
                                 LOADING -> {

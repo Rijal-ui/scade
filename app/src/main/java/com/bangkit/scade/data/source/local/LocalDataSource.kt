@@ -14,7 +14,7 @@ class LocalDataSource private constructor(private val dataDao: DataDao){
             INSTANCE ?: LocalDataSource(dataDao)
     }
 
-    fun getDataCheck(): LiveData<DataEntity> = dataDao.getDataCheck()
+    fun getSessionToken(): LiveData<DataEntity> = dataDao.getSessionToken()
 
 
     fun insertDataCheck(data: DataEntity) {

@@ -9,7 +9,7 @@ import com.bangkit.scade.data.source.local.entity.DataEntity
 interface DataDao {
 
     @Query("SELECT * FROM session")
-    fun getDataCheck(): LiveData<DataEntity>
+    fun getSessionToken(): LiveData<DataEntity>
 
 
 

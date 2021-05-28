@@ -1,6 +1,5 @@
 package com.bangkit.scade.service
 
-import com.bangkit.scade.data.source.local.entity.HospitalEntity
 import com.bangkit.scade.data.source.remote.response.*
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -27,7 +26,10 @@ interface ApiBackendInterface {
     ): SessionResponse
 
     @GET("diagnoses/{ID}")
-    suspend fun getDetailDiagnoses(@Path("ID") id: Int): DiagnosesByIdResponse
+    suspend fun getDetailDiagnoses(
+        @Header("Authorization") token: String,
+        @Path("ID") id: Int
+    ): DiagnosesByIdResponse
 
     @GET("hospitals/{ID}")
     suspend fun getDetailHospital(@Path("ID") id: Int): HospitalByIdResponse
