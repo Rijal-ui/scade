@@ -3,6 +3,7 @@ package com.bangkit.scade.ui.hospital
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -40,11 +41,28 @@ class HospitalActivity : AppCompatActivity() {
         binding.rvListHospital.layoutManager = LinearLayoutManager(this)
         binding.rvListHospital.adapter = adapter
 
+        val extras = intent.getIntExtra(EXTRA_ID_DIAGNOSE, 1)
+        adapter.setIdDiagnose(extras)
+
         val factory = ViewModelFactory.getInstance(this)
         viewModel = ViewModelProvider(
             this,
             factory
         )[HospitalViewModel::class.java]
+
+        binding.findHospital.setOnQueryTextListener( object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                if (query.isNullOrBlank() || query.length < 3) return false
+                viewModel.setSearchHospital(query)
+                return false
+            }
+
+            override fun onQueryTextChange(query: String?): Boolean {
+                if (query.isNullOrBlank()) return false
+                viewModel.setSearchHospital(query)
+                return false
+            }
+        })
 
         viewModel.setListHospital()
 

@@ -1,10 +1,7 @@
 package com.bangkit.scade.data.source
 
 import androidx.lifecycle.LiveData
-import com.bangkit.scade.data.source.local.entity.DataEntity
-import com.bangkit.scade.data.source.local.entity.DiagnosesEntity
-import com.bangkit.scade.data.source.local.entity.HospitalEntity
-import com.bangkit.scade.data.source.local.entity.InformationEntity
+import com.bangkit.scade.data.source.local.entity.*
 import com.bangkit.scade.data.source.remote.response.*
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -20,7 +17,13 @@ interface DataSource {
 
     suspend fun getListHospital(): List<HospitalEntity>
 
+    suspend fun getSearchHospital(query: String): List<HospitalEntity>
+
     suspend fun checkSession(token: String): SessionResponse
+
+    suspend fun getDetailDiagnoses(id: Int): GetDiagnosesEntity
+
+    suspend fun getDetailHospital(id: Int): HospitalEntity
 
     suspend fun login(loginData: LoginRequest): LoginResponse
 

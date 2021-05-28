@@ -1,14 +1,17 @@
 package com.bangkit.scade.ui.hospital
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bangkit.scade.data.source.local.entity.HospitalEntity
 import com.bangkit.scade.databinding.ItemListHospitalBinding
+import com.bangkit.scade.ui.hospital.detail_hospital.DetailHospitalActivity
 
 class HospitalAdapter : RecyclerView.Adapter<HospitalAdapter.ViewHolder>() {
 
     private var listHospital = ArrayList<HospitalEntity>()
+    var idDiagnose: Int? = null
 
     fun setHospital(hospital: List<HospitalEntity>?) {
         if (hospital == null) return
@@ -16,12 +19,20 @@ class HospitalAdapter : RecyclerView.Adapter<HospitalAdapter.ViewHolder>() {
         this.listHospital.addAll(hospital)
     }
 
-    class ViewHolder (private val binding: ItemListHospitalBinding) :
+    inner class ViewHolder (private val binding: ItemListHospitalBinding) :
         RecyclerView.ViewHolder(binding.root){
             fun bind(hospital: HospitalEntity) {
                 with(binding) {
                     tvHospitalTitle.text = hospital.name
                     tvHospitalLocation.text = hospital.address
+
+                    itemView.setOnClickListener {
+                        val intent = Intent(itemView.context, DetailHospitalActivity::class.java).apply {
+                            putExtra(DetailHospitalActivity.EXTRA_ID_HOSPITAL, hospital.id)
+                            putExtra(DetailHospitalActivity.EXTRA_ID_DIAGNOSE, idDiagnose)
+                        }
+                        it.context.startActivity(intent)
+                    }
                 }
             }
     }
@@ -37,4 +48,8 @@ class HospitalAdapter : RecyclerView.Adapter<HospitalAdapter.ViewHolder>() {
     }
 
     override fun getItemCount(): Int = listHospital.size
+
+    fun setIdDiagnose(id: Int) {
+        idDiagnose = id
+    }
 }
