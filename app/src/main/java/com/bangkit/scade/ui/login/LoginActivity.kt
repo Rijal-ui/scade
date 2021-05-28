@@ -62,7 +62,7 @@ class LoginActivity : AppCompatActivity() {
                                 viewModel.insertSession(
                                     DataEntity(
                                         id = 1,
-                                        tokenSection = result.data.data
+                                        tokenSession = result.data.data
                                     )
                                 )
                             }
