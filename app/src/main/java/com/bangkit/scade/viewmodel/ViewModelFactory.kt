@@ -5,6 +5,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.bangkit.scade.data.source.Repository
 import com.bangkit.scade.di.Injection
+import com.bangkit.scade.ui.home.ui.history.HistoryViewModel
+import com.bangkit.scade.ui.home.ui.history.detail_history.DetailHistoryViewModel
 import com.bangkit.scade.ui.home.ui.home.HomeViewModel
 import com.bangkit.scade.ui.home.ui.information.InformationViewModel
 import com.bangkit.scade.ui.hospital.HospitalViewModel
@@ -53,6 +55,12 @@ class ViewModelFactory private constructor(private val repository: Repository) :
             }
             modelClass.isAssignableFrom(BookingHospitalViewModel::class.java) -> {
                 BookingHospitalViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(HistoryViewModel::class.java) -> {
+                HistoryViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(DetailHistoryViewModel::class.java) -> {
+                DetailHistoryViewModel(repository) as T
             }
             else ->throw Throwable("Unknown ViewModel class: " + modelClass.name)
         }

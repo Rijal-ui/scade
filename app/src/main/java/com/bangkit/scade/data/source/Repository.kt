@@ -84,6 +84,30 @@ class Repository constructor(
         return listArticle
     }
 
+    override suspend fun getListInvoices(token: String): List<InvoicesEntity> {
+        val result = withContext(Dispatchers.IO) { (remoteDataSource.getListInvoices(token)) }
+        val listInvoices = ArrayList<InvoicesEntity>()
+        result.data?.forEach { response ->
+            if (response != null) {
+                val invoices = InvoicesEntity(
+                    cancerPosition = response.cancerPosition,
+                    invoiceCreatedAt = response.invoiceCreatedAt,
+                    invoiceUpdatedAt = response.invoiceUpdatedAt,
+                    hospitalProvince = response.hospitalProvince,
+                    cancerName = response.cancerName,
+                    hospitalPhone = response.hospitalPhone,
+                    cancerImage = response.cancerImage,
+                    invoiceId = response.invoiceId,
+                    hospitalCity = response.hospitalCity,
+                    hospitalAddress = response.hospitalAddress,
+                    hospitalName = response.hospitalName
+                )
+                listInvoices.add(invoices)
+            }
+        }
+        return listInvoices
+    }
+
     override suspend fun getListHospital(): List<HospitalEntity> {
         val result = withContext(Dispatchers.IO) { (remoteDataSource.getListHospital()) }
         val listHospital = ArrayList<HospitalEntity>()
@@ -155,6 +179,23 @@ class Repository constructor(
             createdAt = result.data?.createdAt,
             updatedAt = result.data?.updatedAt,
             deletedAt = result.data?.deletedAt
+        )
+    }
+
+    override suspend fun getDetailInvoices(token: String, id: Int): InvoicesEntity {
+        val result = withContext(Dispatchers.IO) { remoteDataSource.getDetailInvoices(token, id) }
+        return InvoicesEntity(
+            cancerPosition = result.data?.cancerPosition,
+            invoiceCreatedAt = result.data?.invoiceCreatedAt,
+            invoiceUpdatedAt = result.data?.invoiceUpdatedAt,
+            hospitalProvince = result.data?.hospitalProvince,
+            cancerName = result.data?.cancerName,
+            hospitalPhone = result.data?.hospitalPhone,
+            cancerImage = result.data?.cancerImage,
+            invoiceId = result.data?.invoiceId,
+            hospitalCity = result.data?.hospitalCity,
+            hospitalAddress = result.data?.hospitalAddress,
+            hospitalName = result.data?.hospitalName
         )
     }
 

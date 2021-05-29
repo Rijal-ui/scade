@@ -15,6 +15,8 @@ interface DataSource {
 
     suspend fun getListIndoensiaArticle(): List<InformationEntity>
 
+    suspend fun getListInvoices(token: String): List<InvoicesEntity>
+
     suspend fun getListHospital(): List<HospitalEntity>
 
     suspend fun getSearchHospital(query: String): List<HospitalEntity>
@@ -24,6 +26,8 @@ interface DataSource {
     suspend fun getDetailDiagnoses(token: String, id: Int): GetDiagnosesEntity
 
     suspend fun getDetailHospital(id: Int): HospitalEntity
+
+    suspend fun getDetailInvoices(token: String, id: Int): InvoicesEntity
 
     suspend fun createInvoice(token: String, invoiceData: InvoiceRequest): InvoiceResponse
 

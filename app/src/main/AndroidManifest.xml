@@ -18,7 +18,8 @@
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup"
         tools:targetApi="m">
-        <activity android:name=".ui.hospital.detail_hospital.BookingHospitalActivity"></activity>
+        <activity android:name=".ui.home.ui.history.detail_history.DetailHistoryActivity"></activity>
+        <activity android:name=".ui.hospital.detail_hospital.BookingHospitalActivity" />
         <activity
             android:name=".ui.register.RegisterActivity"
             android:parentActivityName=".ui.login.LoginActivity" />
@@ -54,6 +55,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.splash.EndSplashActivity" />
     </application>
 
 </manifest>

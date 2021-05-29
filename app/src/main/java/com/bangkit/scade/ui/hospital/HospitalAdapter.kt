@@ -24,7 +24,7 @@ class HospitalAdapter : RecyclerView.Adapter<HospitalAdapter.ViewHolder>() {
             fun bind(hospital: HospitalEntity) {
                 with(binding) {
                     tvHospitalTitle.text = hospital.name
-                    tvHospitalLocation.text = hospital.address
+                    tvHospitalLocation.text = ("${hospital.address}, ${hospital.city}, ${hospital.province}")
 
                     itemView.setOnClickListener {
                         val intent = Intent(itemView.context, BookingHospitalActivity::class.java).apply {
