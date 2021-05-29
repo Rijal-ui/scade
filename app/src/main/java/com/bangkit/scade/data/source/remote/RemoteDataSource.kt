@@ -36,6 +36,10 @@ class RemoteDataSource constructor(
         return apiBackendService.getArticleListIndonesia()
     }
 
+    suspend fun getListInvoices(token: String): InvoicesListResponse {
+        return apiBackendService.getListInvoices(token)
+    }
+
     suspend fun getListHospital(): HospitalResponse {
         return apiBackendService.getListHospital()
     }
@@ -54,6 +58,10 @@ class RemoteDataSource constructor(
 
     suspend fun getDetailHospital(id: Int): HospitalByIdResponse {
         return apiBackendService.getDetailHospital(id)
+    }
+
+    suspend fun getDetailInvoices(token: String, id: Int): InvoicesByIdResponse {
+        return apiBackendService.getDetailInvoices(token, id)
     }
 
     suspend fun createInvoice(token: String, invoiceData: InvoiceRequest): InvoiceResponse {

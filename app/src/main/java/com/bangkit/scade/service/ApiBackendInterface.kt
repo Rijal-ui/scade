@@ -12,6 +12,11 @@ interface ApiBackendInterface {
     @GET("articles/indonesia")
     suspend fun getArticleListIndonesia(): ArticlesResponse
 
+    @GET("invoices")
+    suspend fun getListInvoices(
+        @Header("Authorization") token: String
+    ): InvoicesListResponse
+
     @GET("hospitals")
     suspend fun getListHospital(): HospitalResponse
 
@@ -33,6 +38,12 @@ interface ApiBackendInterface {
 
     @GET("hospitals/{ID}")
     suspend fun getDetailHospital(@Path("ID") id: Int): HospitalByIdResponse
+
+    @GET("invoices/{invoice_id}")
+    suspend fun getDetailInvoices(
+        @Header("Authorization") token: String,
+        @Path("invoice_id") id: Int
+    ): InvoicesByIdResponse
 
     @POST("invoices/create")
     suspend fun createInvoice(

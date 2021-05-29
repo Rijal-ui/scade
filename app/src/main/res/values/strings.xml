@@ -45,10 +45,13 @@
     <string name="error_internet">You don\'t have an internet connection</string>
     <string name="edit_text_empy_error">Field cannot be blank</string>
     <string name="name_spot">Name Spot</string>
-    <string name="cancer_diagnosed">Cancer diagnosed</string>
+    <string name="cancer_diagnosed">Diagnosed Skin Cancer</string>
     <string name="name_cancer">Name Cancer</string>
-    <string name="hospital">Hospital</string>
+    <string name="hospital">The hospital to be booked</string>
     <string name="name_hospital">Name Hospital</string>
     <string name="location">Location</string>
     <string name="create_booking">Create Booking</string>
+    <string name="user_referral_letter">User Referral Letter</string>
+    <string name="phone">Phone</string>
+    <string name="user_last_referral_letter">Your Last Referral Letter</string>
 </resources>
