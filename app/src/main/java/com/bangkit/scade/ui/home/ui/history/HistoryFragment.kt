@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bangkit.scade.R
 import com.bangkit.scade.databinding.FragmentHistoryBinding
 import com.bangkit.scade.ui.home.ui.information.InformationViewModel
@@ -39,6 +40,9 @@ class HistoryFragment : Fragment() {
 
         adapter = HistoryAdapter()
         adapter.notifyDataSetChanged()
+
+        binding.rvHistory.layoutManager = LinearLayoutManager(requireActivity())
+        binding.rvHistory.adapter = adapter
 
         val factory = ViewModelFactory.getInstance(requireActivity())
         viewModel = ViewModelProvider(
