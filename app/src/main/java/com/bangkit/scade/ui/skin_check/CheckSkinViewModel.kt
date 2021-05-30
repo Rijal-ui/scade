@@ -48,7 +48,6 @@ class CheckSkinViewModel(private val repository: Repository) : ViewModel() {
         viewModelScope.launch(exceptionHandler) {
             _idDiagnose.postValue(Resource.loading(null))
             val result = repository.createDiagnoses(token, cancerName, image, position)
-            Log.d("checkcreatediag", result.data.toString())
             _idDiagnose.postValue(Resource.success(result))
         }
     }

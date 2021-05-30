@@ -1,4 +1,4 @@
-package com.bangkit.scade.ui.hospital
+package com.bangkit.scade.ui.hospital.update_hospital
 
 import android.os.Bundle
 import android.view.View
@@ -9,13 +9,14 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bangkit.scade.R
 import com.bangkit.scade.databinding.ActivityHospitalBinding
+import com.bangkit.scade.ui.hospital.HospitalViewModel
 import com.bangkit.scade.viewmodel.ViewModelFactory
 import com.bangkit.scade.vo.Status
 
-class HospitalActivity : AppCompatActivity() {
+class HospitalUpdateActivity : AppCompatActivity() {
 
     private lateinit var viewModel: HospitalViewModel
-    private lateinit var adapter: HospitalAdapter
+    private lateinit var adapter: HospitalUpdateAdapter
     private lateinit var binding: ActivityHospitalBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,22 +26,24 @@ class HospitalActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(false)
-        supportActionBar?.title = getString(R.string.splash_hospital_1)
+        supportActionBar?.title = getString(R.string.splash_hospital_3)
 
-        adapter = HospitalAdapter()
+        adapter = HospitalUpdateAdapter()
         adapter.notifyDataSetChanged()
 
         binding.rvListHospital.layoutManager = LinearLayoutManager(this)
         binding.rvListHospital.adapter = adapter
 
         val extras = intent.getIntExtra(EXTRA_ID_DIAGNOSE, 1)
-        adapter.setIdDiagnose(extras)
+        adapter.setIdInvoice(extras)
 
         val factory = ViewModelFactory.getInstance(this)
         viewModel = ViewModelProvider(
             this,
             factory
         )[HospitalViewModel::class.java]
+
+        viewModel.setListHospital()
 
         binding.findHospital.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
@@ -55,8 +58,6 @@ class HospitalActivity : AppCompatActivity() {
                 return false
             }
         })
-
-        viewModel.setListHospital()
 
         viewModel.listHospital.observe(this, { result ->
             when (result.status) {

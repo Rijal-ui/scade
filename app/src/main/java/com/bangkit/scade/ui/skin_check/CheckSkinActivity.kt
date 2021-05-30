@@ -59,7 +59,6 @@ class CheckSkinActivity : AppCompatActivity() {
                 SUCCESS -> {
                     viewModel.getSession().observe(this, { session ->
                         result.data?.let {
-                            Log.d("inisessioncheck", session.tokenSession)
                             viewModel.createDiagnoses(
                                 session.tokenSession,
                                 result.data.data[0],

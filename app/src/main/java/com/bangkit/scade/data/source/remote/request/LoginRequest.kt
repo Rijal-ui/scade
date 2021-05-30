@@ -1,4 +1,4 @@
-package com.bangkit.scade.data.source.remote.response
+package com.bangkit.scade.data.source.remote.request
 
 data class LoginRequest(
     val email: String,

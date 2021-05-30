@@ -11,7 +11,7 @@ import androidx.core.app.NavUtils
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.bangkit.scade.R
-import com.bangkit.scade.data.source.remote.response.RegisterRequest
+import com.bangkit.scade.data.source.remote.request.RegisterRequest
 import com.bangkit.scade.databinding.ActivityRegisterBinding
 import com.bangkit.scade.viewmodel.ViewModelFactory
 import com.bangkit.scade.vo.Status.*

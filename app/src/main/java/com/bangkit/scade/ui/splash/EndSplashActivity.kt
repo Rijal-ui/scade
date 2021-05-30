@@ -1,10 +1,8 @@
 package com.bangkit.scade.ui.splash
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.core.app.NavUtils
-import com.bangkit.scade.R
+import androidx.appcompat.app.AppCompatActivity
 import com.bangkit.scade.databinding.ActivityEndSplashBinding
 import com.bangkit.scade.ui.home.HomeActivity
 
@@ -30,6 +28,8 @@ class EndSplashActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         super.onBackPressed()
-        NavUtils.navigateUpFromSameTask(this)
+        finish()
+        val intent = Intent(this, HomeActivity::class.java)
+        startActivity(intent)
     }
 }

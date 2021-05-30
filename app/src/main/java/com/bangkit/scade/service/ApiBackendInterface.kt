@@ -1,5 +1,9 @@
 package com.bangkit.scade.service
 
+import com.bangkit.scade.data.source.remote.request.InvoiceRequest
+import com.bangkit.scade.data.source.remote.request.LoginRequest
+import com.bangkit.scade.data.source.remote.request.RegisterRequest
+import com.bangkit.scade.data.source.remote.request.UpdateHospitalRequest
 import com.bangkit.scade.data.source.remote.response.*
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -65,4 +69,12 @@ interface ApiBackendInterface {
         @Part image: MultipartBody.Part,
         @Part("position") position: RequestBody
     ): DiagnosesResponse
+
+    @PUT("invoices/{ID}")
+    suspend fun updateHispitalInvoice(
+        @Header("Authorization") token: String,
+        @Body updateHospitalData: UpdateHospitalRequest,
+        @Path("ID") id: Int
+    ): UpdateHospitalResponse
+
 }

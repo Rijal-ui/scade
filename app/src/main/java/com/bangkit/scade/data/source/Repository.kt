@@ -4,6 +4,10 @@ import androidx.lifecycle.LiveData
 import com.bangkit.scade.data.source.local.LocalDataSource
 import com.bangkit.scade.data.source.local.entity.*
 import com.bangkit.scade.data.source.remote.RemoteDataSource
+import com.bangkit.scade.data.source.remote.request.InvoiceRequest
+import com.bangkit.scade.data.source.remote.request.LoginRequest
+import com.bangkit.scade.data.source.remote.request.RegisterRequest
+import com.bangkit.scade.data.source.remote.request.UpdateHospitalRequest
 import com.bangkit.scade.data.source.remote.response.*
 import com.bangkit.scade.utils.AppExecutors
 import kotlinx.coroutines.Dispatchers
@@ -118,11 +122,8 @@ class Repository constructor(
                     name = response.name,
                     address = response.address,
                     phone = response.phone,
-                    city = response.city,
-                    province = response.province,
-                    createdAt = response.createdAt,
-                    deletedAt = response.deletedAt,
-                    updatedAt = response.updatedAt
+                    city = response.region,
+                    province = response.province
                 )
                 listHospital.add(hospital)
             }
@@ -140,11 +141,8 @@ class Repository constructor(
                     name = response.name,
                     address = response.address,
                     phone = response.phone,
-                    city = response.city,
-                    province = response.province,
-                    createdAt = response.createdAt,
-                    deletedAt = response.deletedAt,
-                    updatedAt = response.updatedAt
+                    city = response.region,
+                    province = response.province
                 )
                 listHospital.add(hospital)
             }
@@ -174,11 +172,8 @@ class Repository constructor(
             name = result.data?.name,
             address = result.data?.address,
             phone = result.data?.phone,
-            city = result.data?.city,
-            province = result.data?.province,
-            createdAt = result.data?.createdAt,
-            updatedAt = result.data?.updatedAt,
-            deletedAt = result.data?.deletedAt
+            city = result.data?.region,
+            province = result.data?.province
         )
     }
 
@@ -235,6 +230,20 @@ class Repository constructor(
             )
         }
         return DiagnosesEntity(result.data)
+    }
+
+    override suspend fun updateHospitalInvoice(
+        token: String,
+        updateData: UpdateHospitalRequest,
+        id: Int
+    ): UpdateHospitalResponse {
+        return withContext(Dispatchers.IO) {
+            remoteDataSource.updateHospitalInvoice(
+                token,
+                updateData,
+                id
+            )
+        }
     }
 
 

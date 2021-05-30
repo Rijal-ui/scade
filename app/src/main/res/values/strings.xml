@@ -12,6 +12,7 @@
     <string name="show_result">SHOW RESULT</string>
     <string name="splash_hospital_1">FIND A HOSPITAL</string>
     <string name="splash_hospital_2">Know nearest hospital from your location</string>
+    <string name="splash_hospital_3">FIND OTHER HOSPITAL</string>
     <string name="find_hospital">Find a Hospital</string>
     <string name="title">Title</string>
     <string name="title_hospital">Hospital Title</string>
@@ -54,4 +55,8 @@
     <string name="user_referral_letter">User Referral Letter</string>
     <string name="phone">Phone</string>
     <string name="user_last_referral_letter">Your Last Referral Letter</string>
+    <string name="change_hospital">Change Hospital</string>
+    <string name="detail_history">Detail History</string>
+    <string name="update_hospital_detail">Update Detail</string>
+    <string name="update_hospital">Update Hospital</string>
 </resources>

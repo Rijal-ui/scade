@@ -8,8 +8,10 @@ import com.bangkit.scade.data.source.Repository
 import com.bangkit.scade.data.source.local.entity.DataEntity
 import com.bangkit.scade.data.source.local.entity.GetDiagnosesEntity
 import com.bangkit.scade.data.source.local.entity.HospitalEntity
-import com.bangkit.scade.data.source.remote.response.InvoiceRequest
+import com.bangkit.scade.data.source.remote.request.InvoiceRequest
+import com.bangkit.scade.data.source.remote.request.UpdateHospitalRequest
 import com.bangkit.scade.data.source.remote.response.InvoiceResponse
+import com.bangkit.scade.data.source.remote.response.UpdateHospitalResponse
 import com.bangkit.scade.vo.Resource
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.launch

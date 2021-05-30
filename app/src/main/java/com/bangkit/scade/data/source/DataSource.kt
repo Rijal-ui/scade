@@ -2,9 +2,11 @@ package com.bangkit.scade.data.source
 
 import androidx.lifecycle.LiveData
 import com.bangkit.scade.data.source.local.entity.*
+import com.bangkit.scade.data.source.remote.request.InvoiceRequest
+import com.bangkit.scade.data.source.remote.request.LoginRequest
+import com.bangkit.scade.data.source.remote.request.RegisterRequest
+import com.bangkit.scade.data.source.remote.request.UpdateHospitalRequest
 import com.bangkit.scade.data.source.remote.response.*
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
 import java.io.File
 
 interface DataSource {
@@ -41,6 +43,12 @@ interface DataSource {
         image: File,
         position: String
     ): DiagnosesEntity
+
+    suspend fun updateHospitalInvoice(
+        token: String,
+        updateData: UpdateHospitalRequest,
+        id: Int
+    ): UpdateHospitalResponse
 
     fun getSessionToken(): LiveData<DataEntity>
 
