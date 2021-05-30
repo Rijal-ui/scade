@@ -7,8 +7,5 @@ data class HospitalEntity (
     val address: String? = null,
     val phone: String? = null,
     val city: String? = null,
-    val province: String? = null,
-    val createdAt: String? = null,
-    val updatedAt: String? = null,
-    val deletedAt: Any? = null
+    val province: String? = null
 )

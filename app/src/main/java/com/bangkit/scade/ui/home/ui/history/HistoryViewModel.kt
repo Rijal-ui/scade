@@ -15,7 +15,7 @@ import kotlinx.coroutines.launch
 class HistoryViewModel(val repository: Repository) : ViewModel() {
 
     private val _listHistory = MutableLiveData<Resource<List<InvoicesEntity>>>()
-    var listHistory: LiveData<Resource<List<InvoicesEntity>>> = _listHistory
+    var listHistory = _listHistory
 
     private val exceptionHandler = CoroutineExceptionHandler{ _, exception ->
         _listHistory.postValue(Resource.error("Something went wrong", null))

@@ -16,18 +16,12 @@ data class DataHospital (
     @field:SerializedName("phone")
     val phone: String? = null,
 
-    @field:SerializedName("city")
-    val city: String? = null,
+    @field:SerializedName("region")
+    val region: String? = null,
 
     @field:SerializedName("province")
     val province: String? = null,
 
     @field:SerializedName("CreatedAt")
-    val createdAt: String? = null,
-
-    @field:SerializedName("UpdatedAt")
-    val updatedAt: String? = null,
-
-    @field:SerializedName("DeletedAt")
-    val deletedAt: Any? = null
+    val createdAt: String? = null
 )

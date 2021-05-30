@@ -1,5 +1,9 @@
 package com.bangkit.scade.data.source.remote
 
+import com.bangkit.scade.data.source.remote.request.InvoiceRequest
+import com.bangkit.scade.data.source.remote.request.LoginRequest
+import com.bangkit.scade.data.source.remote.request.RegisterRequest
+import com.bangkit.scade.data.source.remote.request.UpdateHospitalRequest
 import com.bangkit.scade.data.source.remote.response.*
 import com.bangkit.scade.service.ApiBackendInterface
 import com.bangkit.scade.service.ApiMLInterface
@@ -83,5 +87,13 @@ class RemoteDataSource constructor(
         position: RequestBody
     ): DiagnosesResponse {
         return apiBackendService.createDiagnoses(token, cancerName, image, position)
+    }
+
+    suspend fun updateHospitalInvoice(
+        token: String,
+        updateData: UpdateHospitalRequest,
+        id: Int
+    ) : UpdateHospitalResponse {
+        return apiBackendService.updateHispitalInvoice(token, updateData, id)
     }
 }

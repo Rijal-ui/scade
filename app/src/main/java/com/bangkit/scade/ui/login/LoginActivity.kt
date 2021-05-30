@@ -11,7 +11,7 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.bangkit.scade.R
 import com.bangkit.scade.data.source.local.entity.DataEntity
-import com.bangkit.scade.data.source.remote.response.LoginRequest
+import com.bangkit.scade.data.source.remote.request.LoginRequest
 import com.bangkit.scade.databinding.ActivityLoginBinding
 import com.bangkit.scade.ui.home.HomeActivity
 import com.bangkit.scade.ui.register.RegisterActivity

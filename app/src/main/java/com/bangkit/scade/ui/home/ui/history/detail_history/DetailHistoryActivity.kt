@@ -2,6 +2,7 @@ package com.bangkit.scade.ui.home.ui.history.detail_history
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.bangkit.scade.R
 import com.bangkit.scade.data.source.local.entity.InvoicesEntity
@@ -59,7 +60,13 @@ class DetailHistoryActivity : AppCompatActivity() {
                 })
             }
         })
+
+        binding.btnUpdateHospital.setOnClickListener {
+            Toast.makeText(this, idHistory.toString(), Toast.LENGTH_SHORT).show()
+        }
+
     }
+
 
     private fun populateDataHistory(data: Resource<InvoicesEntity>) {
         with(binding) {

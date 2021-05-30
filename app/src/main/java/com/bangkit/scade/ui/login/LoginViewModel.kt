@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.bangkit.scade.data.source.Repository
 import com.bangkit.scade.data.source.local.entity.DataEntity
-import com.bangkit.scade.data.source.remote.response.LoginRequest
+import com.bangkit.scade.data.source.remote.request.LoginRequest
 import com.bangkit.scade.data.source.remote.response.LoginResponse
 import com.bangkit.scade.vo.Resource
 import kotlinx.coroutines.CoroutineExceptionHandler

@@ -28,8 +28,8 @@ data class DataHospitals(
 	@field:SerializedName("phone")
 	val phone: String? = null,
 
-	@field:SerializedName("city")
-	val city: String? = null,
+	@field:SerializedName("region")
+	val region: String? = null,
 
 	@field:SerializedName("CreatedAt")
 	val createdAt: String? = null,

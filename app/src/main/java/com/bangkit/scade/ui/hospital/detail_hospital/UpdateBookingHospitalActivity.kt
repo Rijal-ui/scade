@@ -10,6 +10,7 @@ import com.bangkit.scade.R
 import com.bangkit.scade.data.source.local.entity.GetDiagnosesEntity
 import com.bangkit.scade.data.source.local.entity.HospitalEntity
 import com.bangkit.scade.data.source.remote.request.InvoiceRequest
+import com.bangkit.scade.data.source.remote.request.UpdateHospitalRequest
 import com.bangkit.scade.databinding.ActivityBookingHospitalBinding
 import com.bangkit.scade.ui.splash.EndSplashActivity
 import com.bangkit.scade.viewmodel.ViewModelFactory
@@ -18,7 +19,7 @@ import com.bangkit.scade.vo.Status.*
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 
-class BookingHospitalActivity : AppCompatActivity() {
+class UpdateBookingHospitalActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityBookingHospitalBinding
     private lateinit var viewModel: BookingHospitalViewModel
@@ -56,14 +57,13 @@ class BookingHospitalActivity : AppCompatActivity() {
                 idHospital = extras.getInt(EXTRA_ID_HOSPITAL)
 
                 binding.btnCreateBooking.setOnClickListener {
-                    val invoiceData = InvoiceRequest(
-                        hospital_id = idHospital,
-                        diagnose_id = idDiagnose
+                    val updateData = UpdateHospitalRequest(
+                        hospital_id = idHospital
                     )
 
-                    viewModel.createInvoice(token, invoiceData)
+                    viewModel.updateHospital(token, updateData, idDiagnose)
 
-                    viewModel.invoice.observe(this , { result ->
+                    viewModel.update.observe(this , { result ->
                         when(result.status) {
                             SUCCESS -> {
                                 val intent = Intent(this, EndSplashActivity::class.java)
@@ -78,6 +78,8 @@ class BookingHospitalActivity : AppCompatActivity() {
                         }
                     })
 
+                    val intent = Intent(this, EndSplashActivity::class.java)
+                    startActivity(intent)
                 }
 
                 viewModel.getDataDiagnose(token, idDiagnose)
@@ -105,8 +107,8 @@ class BookingHospitalActivity : AppCompatActivity() {
                 viewModel.dataHospital.observe(this, { result ->
                     when (result.status) {
                         SUCCESS -> {
-                        detailHospital = result
-                        populateDataHospital(result)
+                            detailHospital = result
+                            populateDataHospital(result)
                         }
                         LOADING -> {
                         }
@@ -141,7 +143,7 @@ class BookingHospitalActivity : AppCompatActivity() {
     private fun populateDataHospital(data: Resource<HospitalEntity>) {
         with(binding) {
             tvNameHospital.text = (getString(R.string.name_hospital) + " : ${data.data?.name}")
-            tvPhoneHospital.text = (getString(R.string.phone) + " : ${ data.data?.phone}")
+            tvPhoneHospital.text = (getString(R.string.phone) + " : ${data.data?.phone}")
             tvLocationHospital.text =
                 (getString(R.string.location) +
                         " : ${data.data?.address}, ${data.data?.city}, ${data.data?.province}")
@@ -153,7 +155,7 @@ class BookingHospitalActivity : AppCompatActivity() {
             tvNameSpot.text = (getString(R.string.name_spot) + " : ${data.data?.position}")
             tvContentCancer.text = (getString(R.string.name_cancer) + " : ${data.data?.cancerName}")
 
-            Glide.with(this@BookingHospitalActivity)
+            Glide.with(this@UpdateBookingHospitalActivity)
                 .load("http://35.213.130.133:8080/diagnoses/image/" + data.data?.cancerImage)
                 .apply(RequestOptions())
                 .into(imageCancer)

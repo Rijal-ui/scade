@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.bangkit.scade.data.source.Repository
-import com.bangkit.scade.data.source.remote.response.RegisterRequest
+import com.bangkit.scade.data.source.remote.request.RegisterRequest
 import com.bangkit.scade.data.source.remote.response.RegisterResponse
 import com.bangkit.scade.vo.Resource
 import kotlinx.coroutines.CoroutineExceptionHandler
