@@ -36,31 +36,11 @@ class MainSplashActivity : AppCompatActivity() {
 
         viewModel.checkExist().observe(this, {
             exist = it
-//            Log.d("inicheckexist", exist.toString())
             if (exist) {
                 viewModel.setSession().observe(this, { entity ->
                     token = entity.tokenSession
-//                    Log.d("inichecktokenac", entity.tokenSession)
                     viewModel.checkSession(token)
-//                    viewModel.session.observe(this, { result ->
-//                        when (result.status) {
-//                            SUCCESS -> {
-////                                session = result.message.toString()
-//                                session = result
-//                                Log.d("inisession", session)
-//                            }
-//                            LOADING -> {
-//                            }
-//                            Status.ERROR -> {
-//                                Toast.makeText(
-//                                    this,
-//                                    getString(R.string.error_message),
-//                                    Toast.LENGTH_SHORT
-//                                )
-//                                    .show()
-//                            }
-//                        }
-//                    })
+//
                 })
             }
 
@@ -83,7 +63,7 @@ class MainSplashActivity : AppCompatActivity() {
                                 SUCCESS -> {
                                     if (result.data?.message != null) {
                                         session = result.data.message
-//                                        Log.d("inisession", session)
+
                                     }
                                 }
                                 LOADING -> {

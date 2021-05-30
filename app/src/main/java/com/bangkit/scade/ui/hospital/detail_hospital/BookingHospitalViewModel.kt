@@ -27,14 +27,10 @@ class BookingHospitalViewModel(private val repository: Repository) : ViewModel()
     private val _invoice = MutableLiveData<Resource<InvoiceResponse>>()
     var invoice = _invoice
 
-    private val _update = MutableLiveData<Resource<UpdateHospitalResponse>>()
-    var update = _update
-
     private val exceptionHandler = CoroutineExceptionHandler { _, exception ->
         _dataDiagnose.postValue(Resource.error("Something went wrong", null))
         _dataHospital.postValue(Resource.error("Something went wrong", null))
         _invoice.postValue(Resource.error("Something went wrong", null))
-        _update.postValue(Resource.error("Something went wrong", null))
     }
 
     fun createInvoice(token: String, invoiceData: InvoiceRequest) {
@@ -44,16 +40,6 @@ class BookingHospitalViewModel(private val repository: Repository) : ViewModel()
             _invoice.postValue(Resource.success(result))
         }
     }
-
-    fun updateHospital(token: String, updateData: UpdateHospitalRequest, id: Int) {
-        viewModelScope.launch(exceptionHandler) {
-            _update.postValue(Resource.loading(null))
-            val result = repository.updateHospitalInvoice(token, updateData, id)
-            _update.postValue(Resource.success(result))
-        }
-    }
-
-
 
     fun getSession(): LiveData<DataEntity> {
         return repository.getSessionToken()

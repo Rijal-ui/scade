@@ -6,12 +6,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bangkit.scade.data.source.local.entity.HospitalEntity
 import com.bangkit.scade.databinding.ItemListHospitalBinding
-import com.bangkit.scade.ui.hospital.detail_hospital.BookingHospitalActivity
+import com.bangkit.scade.ui.hospital.detail_hospital.UpdateBookingHospitalActivity
+import com.bangkit.scade.ui.hospital.detail_hospital.UpdateBookingHospitalActivity.Companion.EXTRA_ID_DIAGNOSE
+import com.bangkit.scade.ui.hospital.detail_hospital.UpdateBookingHospitalActivity.Companion.EXTRA_ID_HOSPITAL
 
 class HospitalUpdateAdapter : RecyclerView.Adapter<HospitalUpdateAdapter.ViewHolder>() {
 
     private var listHospital = ArrayList<HospitalEntity>()
-    var idDiagnose: Int? = null
+    var idInvoice: Int? = null
 
     fun setHospital(hospital: List<HospitalEntity>?) {
         if (hospital == null) return
@@ -29,9 +31,9 @@ class HospitalUpdateAdapter : RecyclerView.Adapter<HospitalUpdateAdapter.ViewHol
 
                 itemView.setOnClickListener {
                     val intent =
-                        Intent(itemView.context, HospitalUpdateActivity::class.java).apply {
-                            putExtra(BookingHospitalActivity.EXTRA_ID_HOSPITAL, hospital.id)
-                            putExtra(BookingHospitalActivity.EXTRA_ID_DIAGNOSE, idDiagnose)
+                        Intent(itemView.context, UpdateBookingHospitalActivity::class.java).apply {
+                            putExtra(EXTRA_ID_HOSPITAL, hospital.id)
+                            putExtra(EXTRA_ID_DIAGNOSE, idInvoice)
                         }
                     it.context.startActivity(intent)
                 }
@@ -52,7 +54,7 @@ class HospitalUpdateAdapter : RecyclerView.Adapter<HospitalUpdateAdapter.ViewHol
 
     override fun getItemCount(): Int = listHospital.size
 
-    fun setIdDiagnose(id: Int) {
-        idDiagnose = id
+    fun setIdInvoice(id: Int) {
+        idInvoice = id
     }
 }

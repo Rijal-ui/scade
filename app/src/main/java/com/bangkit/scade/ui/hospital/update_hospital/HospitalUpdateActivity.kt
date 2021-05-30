@@ -1,7 +1,6 @@
 package com.bangkit.scade.ui.hospital.update_hospital
 
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.view.View
 import android.widget.SearchView
 import android.widget.Toast
@@ -20,13 +19,13 @@ class HospitalUpdateActivity : AppCompatActivity() {
     private lateinit var adapter: HospitalUpdateAdapter
     private lateinit var binding: ActivityHospitalBinding
 
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onCreate(savedInstanceState, persistentState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
         binding = ActivityHospitalBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayHomeAsUpEnabled(false)
         supportActionBar?.title = getString(R.string.splash_hospital_3)
 
         adapter = HospitalUpdateAdapter()
@@ -36,7 +35,7 @@ class HospitalUpdateActivity : AppCompatActivity() {
         binding.rvListHospital.adapter = adapter
 
         val extras = intent.getIntExtra(EXTRA_ID_DIAGNOSE, 1)
-        adapter.setIdDiagnose(extras)
+        adapter.setIdInvoice(extras)
 
         val factory = ViewModelFactory.getInstance(this)
         viewModel = ViewModelProvider(
@@ -82,5 +81,4 @@ class HospitalUpdateActivity : AppCompatActivity() {
     companion object {
         const val EXTRA_ID_DIAGNOSE = "extra_id_diagnose"
     }
-
 }

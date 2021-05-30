@@ -11,6 +11,7 @@ import com.bangkit.scade.ui.home.ui.home.HomeViewModel
 import com.bangkit.scade.ui.home.ui.information.InformationViewModel
 import com.bangkit.scade.ui.hospital.HospitalViewModel
 import com.bangkit.scade.ui.hospital.detail_hospital.BookingHospitalViewModel
+import com.bangkit.scade.ui.hospital.detail_hospital.UpdateBookingHospitalViewModel
 import com.bangkit.scade.ui.login.LoginViewModel
 import com.bangkit.scade.ui.register.RegisterViewModel
 import com.bangkit.scade.ui.skin_check.CheckSkinViewModel
@@ -61,6 +62,9 @@ class ViewModelFactory private constructor(private val repository: Repository) :
             }
             modelClass.isAssignableFrom(DetailHistoryViewModel::class.java) -> {
                 DetailHistoryViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(UpdateBookingHospitalViewModel::class.java) -> {
+                UpdateBookingHospitalViewModel(repository) as T
             }
             else ->throw Throwable("Unknown ViewModel class: " + modelClass.name)
         }

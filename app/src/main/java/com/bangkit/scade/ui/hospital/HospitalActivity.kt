@@ -1,10 +1,10 @@
 package com.bangkit.scade.ui.hospital
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.SearchView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bangkit.scade.R
@@ -13,8 +13,6 @@ import com.bangkit.scade.viewmodel.ViewModelFactory
 import com.bangkit.scade.vo.Status
 
 class HospitalActivity : AppCompatActivity() {
-
-    //JANGAN LUPA DIBALIKAN SEARCHVIEW NYA
 
     private lateinit var viewModel: HospitalViewModel
     private lateinit var adapter: HospitalAdapter
@@ -26,7 +24,7 @@ class HospitalActivity : AppCompatActivity() {
         binding = ActivityHospitalBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayHomeAsUpEnabled(false)
         supportActionBar?.title = getString(R.string.splash_hospital_1)
 
         adapter = HospitalAdapter()
@@ -44,7 +42,7 @@ class HospitalActivity : AppCompatActivity() {
             factory
         )[HospitalViewModel::class.java]
 
-        binding.findHospital.setOnQueryTextListener( object : SearchView.OnQueryTextListener {
+        binding.findHospital.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 if (query.isNullOrBlank() || query.length < 3) return false
                 viewModel.setSearchHospital(query)
@@ -63,7 +61,7 @@ class HospitalActivity : AppCompatActivity() {
         viewModel.listHospital.observe(this, { result ->
             when (result.status) {
                 Status.SUCCESS -> {
-                    result.data?.let { adapter.setHospital(result.data)}
+                    result.data?.let { adapter.setHospital(result.data) }
                     adapter.notifyDataSetChanged()
                     binding.progressBar.visibility = View.GONE
                 }
@@ -72,7 +70,8 @@ class HospitalActivity : AppCompatActivity() {
                 }
                 Status.ERROR -> {
                     binding.progressBar.visibility = View.GONE
-                    Toast.makeText(this, getString(R.string.error_message), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.error_message), Toast.LENGTH_SHORT)
+                        .show()
                 }
             }
         })

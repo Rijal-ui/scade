@@ -26,7 +26,7 @@ interface ApiBackendInterface {
 
     @GET("hospitals/search")
     suspend fun getSearchHospital(
-        @Query("region") city: String
+        @Query("city") city: String
     ): HospitalResponse
 
     @GET("article_languages")

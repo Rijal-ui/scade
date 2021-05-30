@@ -1,6 +1,5 @@
 package com.bangkit.scade.ui.hospital
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -15,7 +14,7 @@ class HospitalViewModel(val repository: Repository) : ViewModel() {
 
     private val _listHospital = MutableLiveData<Resource<List<HospitalEntity>>>()
 
-    private val exceptionHandler = CoroutineExceptionHandler{ _, exception ->
+    private val exceptionHandler = CoroutineExceptionHandler { _, exception ->
         _listHospital.postValue(Resource.error("Something went wrong", null))
     }
 

@@ -56,7 +56,6 @@ class LoginActivity : AppCompatActivity() {
             viewModel.login.observe(this, { result ->
                 when (result.status) {
                     SUCCESS -> {
-                        Log.d("result", result.data?.message.toString())
                         if (result.data?.message.toString() == "sign in successfully") {
                             if (result.data?.data != null) {
                                 viewModel.insertSession(

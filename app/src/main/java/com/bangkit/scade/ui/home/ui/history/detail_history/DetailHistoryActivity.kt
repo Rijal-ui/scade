@@ -1,5 +1,6 @@
 package com.bangkit.scade.ui.home.ui.history.detail_history
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -8,6 +9,9 @@ import com.bangkit.scade.R
 import com.bangkit.scade.data.source.local.entity.InvoicesEntity
 import com.bangkit.scade.databinding.ActivityDetailHistoryBinding
 import com.bangkit.scade.ui.hospital.detail_hospital.BookingHospitalViewModel
+import com.bangkit.scade.ui.hospital.update_hospital.HospitalUpdateActivity
+import com.bangkit.scade.ui.hospital.update_hospital.HospitalUpdateActivity.Companion.EXTRA_ID_DIAGNOSE
+import com.bangkit.scade.ui.splash.EndSplashActivity
 import com.bangkit.scade.viewmodel.ViewModelFactory
 import com.bangkit.scade.vo.Resource
 import com.bangkit.scade.vo.Status
@@ -28,6 +32,9 @@ class DetailHistoryActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.title = getString(R.string.detail_history)
 
         binding = ActivityDetailHistoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -62,7 +69,9 @@ class DetailHistoryActivity : AppCompatActivity() {
         })
 
         binding.btnUpdateHospital.setOnClickListener {
-            Toast.makeText(this, idHistory.toString(), Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, HospitalUpdateActivity::class.java)
+            intent.putExtra(EXTRA_ID_DIAGNOSE, idHistory)
+            startActivity(intent)
         }
 
     }
@@ -83,4 +92,5 @@ class DetailHistoryActivity : AppCompatActivity() {
                 .into(imageCancer)
         }
     }
+
 }

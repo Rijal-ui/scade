@@ -56,4 +56,7 @@
     <string name="phone">Phone</string>
     <string name="user_last_referral_letter">Your Last Referral Letter</string>
     <string name="change_hospital">Change Hospital</string>
+    <string name="detail_history">Detail History</string>
+    <string name="update_hospital_detail">Update Detail</string>
+    <string name="update_hospital">Update Hospital</string>
 </resources>

@@ -18,7 +18,9 @@
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup"
         tools:targetApi="m">
-        <activity android:name=".ui.home.ui.history.detail_history.DetailHistoryActivity"></activity>
+        <activity android:name=".ui.home.ui.history.detail_history.DetailHistoryActivity" />
+        <activity android:name=".ui.hospital.detail_hospital.UpdateBookingHospitalActivity"/>
+        <activity android:name=".ui.hospital.update_hospital.HospitalUpdateActivity"/>
         <activity android:name=".ui.hospital.detail_hospital.BookingHospitalActivity" />
         <activity
             android:name=".ui.register.RegisterActivity"
