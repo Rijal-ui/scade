@@ -4,15 +4,15 @@
     <string name="title_home">SCADE</string>
     <string name="title_information">Information</string>
     <string name="title_history">History</string>
-    <string name="splash_check_1">CHECK YOUR SKIN</string>
+    <string name="splash_check_1">Check Your Skin</string>
     <string name="splash_check_2">Get the result with only ONE capture</string>
-    <string name="start">START NOW</string>
+    <string name="start">Start Now</string>
     <string name="spot_location">Spot Location</string>
     <string name="example">Right Arm</string>
     <string name="show_result">SHOW RESULT</string>
-    <string name="splash_hospital_1">FIND A HOSPITAL</string>
+    <string name="splash_hospital_1">Find a Hospital</string>
     <string name="splash_hospital_2">Know nearest hospital from your location</string>
-    <string name="splash_hospital_3">FIND OTHER HOSPITAL</string>
+    <string name="splash_hospital_3">Find other Hospital</string>
     <string name="find_hospital">Find a Hospital</string>
     <string name="title">Title</string>
     <string name="title_hospital">Hospital Title</string>
@@ -32,10 +32,10 @@
     <string name="address">Address</string>
     <string name="retype_password">Retype Password</string>
     <string name="session_end">Session expired, please login again</string>
-    <string name="booking">BOOKING A HOSPITAL</string>
-    <string name="send">SEND</string>
+    <string name="booking">Booking a Hospital</string>
+    <string name="send">Send</string>
     <string name="booking_hospital">You have booked the hospital</string>
-    <string name="back_to_home">BACK TO HOME</string>
+    <string name="back_to_home">Back to Home</string>
     <string name="email_not_valid">Invalid email format</string>
     <string name="password_not_same">Password not same</string>
     <string name="phone_number">Phone Number</string>
@@ -59,4 +59,5 @@
     <string name="detail_history">Detail History</string>
     <string name="update_hospital_detail">Update Detail</string>
     <string name="update_hospital">Update Hospital</string>
+    <string name="title_article">Title Article</string>
 </resources>
