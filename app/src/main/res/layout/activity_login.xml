@@ -10,7 +10,7 @@
         android:id="@+id/img_logo"
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:src="@drawable/res_main_splash"
+        android:src="@drawable/res_new_main_splash"
         app:layout_constraintBottom_toTopOf="@+id/edit_email"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

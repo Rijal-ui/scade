@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">scade</string>
+    <string name="app_name">SCADE</string>
     <string name="title_activity_home">MainActivity</string>
     <string name="title_home">SCADE</string>
     <string name="title_information">Information</string>
@@ -59,4 +59,5 @@
     <string name="detail_history">Detail History</string>
     <string name="update_hospital_detail">Update Detail</string>
     <string name="update_hospital">Update Hospital</string>
+    <string name="change_language_settings">Change Language Settings</string>
 </resources>

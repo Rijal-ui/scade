@@ -3,8 +3,11 @@ package com.bangkit.scade.ui.login
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.provider.Settings
 import android.util.Log
 import android.util.Patterns
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -149,5 +152,18 @@ class LoginActivity : AppCompatActivity() {
 
     private fun showEmailExistAlert(isNotValid: Boolean) {
         binding.editEmail.error = if (isNotValid) getString(R.string.email_not_valid) else null
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.action_change_settings) {
+            val mIntent = Intent(Settings.ACTION_LOCALE_SETTINGS)
+            startActivity(mIntent)
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

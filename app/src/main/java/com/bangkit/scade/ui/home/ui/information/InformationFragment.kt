@@ -4,12 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bangkit.scade.R
 import com.bangkit.scade.databinding.FragmentInformationBinding
 import com.bangkit.scade.viewmodel.ViewModelFactory
+import com.bangkit.scade.vo.Status
 
 class InformationFragment : Fragment() {
 
@@ -48,9 +51,23 @@ class InformationFragment : Fragment() {
             factory
         )[InformationViewModel::class.java]
 
-        viewModel.listArticle.observe(viewLifecycleOwner,{list ->
-            adapter.setInformation(list)
-            adapter.notifyDataSetChanged()
+        viewModel.getListArticle()
+        viewModel.listArticle.observe(viewLifecycleOwner,{ list ->
+            when(list.status) {
+                Status.SUCCESS -> {
+                    list.data?.let { adapter.setInformation(list.data) }
+                    adapter.notifyDataSetChanged()
+                    binding.progressBar.visibility = View.GONE
+                }
+                Status.LOADING -> {
+                    binding.progressBar.visibility = View.VISIBLE
+                }
+                Status.ERROR -> {
+                    binding.progressBar.visibility = View.GONE
+                    Toast.makeText(activity, getString(R.string.error_message), Toast.LENGTH_SHORT)
+                        .show()
+                }
+            }
         })
 
     }
