@@ -7,20 +7,34 @@ import androidx.lifecycle.viewModelScope
 import com.bangkit.scade.data.source.Repository
 import com.bangkit.scade.data.source.local.entity.InformationEntity
 import com.bangkit.scade.data.source.remote.response.ArticlesResponse
+import com.bangkit.scade.vo.Resource
+import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.launch
 import java.util.*
 
 class InformationViewModel(val repository: Repository) : ViewModel() {
 
-    private val _listArticle = MutableLiveData<List<InformationEntity>>().apply {
-        viewModelScope.launch {
+    private val _listArticle = MutableLiveData<Resource<List<InformationEntity>>>()
+
+    private val exceptionHandler = CoroutineExceptionHandler { _, exception ->
+        _listArticle.postValue(Resource.error("Something went wrong", null))
+    }
+
+    var listArticle: LiveData<Resource<List<InformationEntity>>> = _listArticle
+
+    fun getListArticle() {
+        viewModelScope.launch(exceptionHandler) {
             //English
-            value = if (Locale.getDefault().language == "in") {
-                repository.getListIndoensiaArticle()
+            if (Locale.getDefault().language == "in") {
+                _listArticle.postValue(Resource.loading(null))
+                val resultIndo = repository.getListIndoensiaArticle()
+                _listArticle.postValue(Resource.success(resultIndo))
             } else {
-                repository.getListEnglishArticle()
+                _listArticle.postValue(Resource.loading(null))
+                val resultEng = repository.getListEnglishArticle()
+                _listArticle.postValue(Resource.success(resultEng))
             }
         }
     }
-    var listArticle: LiveData<List<InformationEntity>> = _listArticle
+
 }

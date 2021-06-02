@@ -1,7 +1,11 @@
 package com.bangkit.scade.ui.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.provider.Settings
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Toast
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
@@ -47,6 +51,19 @@ class HomeActivity : AppCompatActivity() {
         Toast.makeText(this, getString(R.string.double_tap_message), Toast.LENGTH_SHORT).show()
 
         Handler().postDelayed(Runnable { doubleBackToExitPressedOnce = false }, 2000)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.action_change_settings) {
+            val mIntent = Intent(Settings.ACTION_LOCALE_SETTINGS)
+            startActivity(mIntent)
+        }
+        return super.onOptionsItemSelected(item)
     }
 
 }
