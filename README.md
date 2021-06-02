@@ -8,7 +8,7 @@ This guide will help you how to build this app on your own using Android Studio.
 
 ## Starter
 
-> Starter kit for this applications using [Android Studio](https://github.com/facebook/create-react-app)
+> Starter kit for this applications using [Android Studio](https://developer.android.com/studio/index.html#downloads)
 
 > If you got problem when installing JDK through Android Studio, try to install it manually. [JDK](https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html)
 
