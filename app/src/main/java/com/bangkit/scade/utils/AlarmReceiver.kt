@@ -10,6 +10,7 @@ import android.content.Intent
 import android.media.RingtoneManager
 import android.os.Build
 import androidx.core.app.NotificationCompat
+import com.bangkit.scade.R
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
@@ -17,8 +18,6 @@ import java.util.*
 class AlarmReceiver : BroadcastReceiver() {
 
     companion object {
-        private const val DATE_FORMAT = "yyyy-MM-dd"
-        private const val TIME_FORMAT = "HH:mm"
         private const val NOTIF_ID = 1
         private const val ID_ONETIME = 100
     }
@@ -32,27 +31,24 @@ class AlarmReceiver : BroadcastReceiver() {
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         val intent = Intent(context, AlarmReceiver::class.java)
 
-        val message = "Don't Forget to Check Up"
-
         val currentTime = Calendar.getInstance().timeInMillis
-        val targetTime = currentTime.plus(604800000)
+        val targetTime = currentTime.plus(10000)
 
         val pendingIntent = PendingIntent.getBroadcast(context, ID_ONETIME, intent, 0)
         alarmManager.set(AlarmManager.RTC_WAKEUP, targetTime, pendingIntent)
     }
 
     fun showNotification(context: Context) {
-        val intent = context.packageManager.getLaunchIntentForPackage("com.bagkit.scade")
-        val pendingIntent = PendingIntent.getActivity(context, 0, intent, 0)
-
         val channelId = "Channel_1"
         val channelName = "AlarmManager channel"
 
         val notificationManagerCompat = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        val alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
         val builder = NotificationCompat.Builder(context, channelId)
-            .setContentIntent(pendingIntent)
+            .setSmallIcon(R.drawable.ic_notifications)
             .setContentTitle("Check Up Reminder")
             .setContentText("Don't Forget to Consult Your Last Week Check Up")
+            .setSound(alarmSound)
             .setAutoCancel(true)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
