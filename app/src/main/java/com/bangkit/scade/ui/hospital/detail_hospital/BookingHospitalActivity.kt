@@ -15,6 +15,7 @@ import com.bangkit.scade.data.source.local.entity.HospitalEntity
 import com.bangkit.scade.data.source.remote.request.InvoiceRequest
 import com.bangkit.scade.databinding.ActivityBookingHospitalBinding
 import com.bangkit.scade.ui.splash.EndSplashActivity
+import com.bangkit.scade.utils.AlarmReceiver
 import com.bangkit.scade.viewmodel.ViewModelFactory
 import com.bangkit.scade.vo.Resource
 import com.bangkit.scade.vo.Status.*
@@ -69,6 +70,8 @@ class BookingHospitalActivity : AppCompatActivity() {
                     viewModel.invoice.observe(this , { result ->
                         when(result.status) {
                             SUCCESS -> {
+                                val alarmReceiver = AlarmReceiver()
+                                alarmReceiver.setOneTimeAlarm(this@BookingHospitalActivity)
                                 val intent = Intent(this, EndSplashActivity::class.java)
                                 startActivity(intent)
                             }
