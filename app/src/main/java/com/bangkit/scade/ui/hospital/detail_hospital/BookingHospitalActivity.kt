@@ -28,6 +28,7 @@ class BookingHospitalActivity : AppCompatActivity() {
     private lateinit var viewModel: BookingHospitalViewModel
     private lateinit var detailHospital: Resource<HospitalEntity>
     private lateinit var detailDiagnose: Resource<GetDiagnosesEntity>
+    private lateinit var alarmReceiver: AlarmReceiver
     private var idDiagnose: Int = 1
     private var idHospital: Int = 1
     private var token: String = ""
@@ -70,8 +71,8 @@ class BookingHospitalActivity : AppCompatActivity() {
                     viewModel.invoice.observe(this , { result ->
                         when(result.status) {
                             SUCCESS -> {
-                                val alarmReceiver = AlarmReceiver()
-                                alarmReceiver.setOneTimeAlarm(this@BookingHospitalActivity)
+                                alarmReceiver = AlarmReceiver()
+                                alarmReceiver.setOneTimeAlarm(this)
                                 val intent = Intent(this, EndSplashActivity::class.java)
                                 startActivity(intent)
                             }
