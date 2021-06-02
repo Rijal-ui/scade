@@ -1,5 +1,6 @@
 package com.bangkit.scade.ui.home.ui.information
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bangkit.scade.R
 import com.bangkit.scade.databinding.FragmentInformationBinding
+import com.bangkit.scade.ui.detailinformation.DetailInformationActivity
+import com.bangkit.scade.ui.detailinformation.DetailInformationActivity.Companion.EXTRA_DATA
 import com.bangkit.scade.viewmodel.ViewModelFactory
 import com.bangkit.scade.vo.Status
 
@@ -69,6 +72,13 @@ class InformationFragment : Fragment() {
                 }
             }
         })
+
+        adapter.onItemClick = { selectedData ->
+            val intent = Intent(requireActivity(), DetailInformationActivity::class.java)
+            intent.putExtra(EXTRA_DATA, selectedData)
+            startActivity(intent)
+        }
+
 
     }
 

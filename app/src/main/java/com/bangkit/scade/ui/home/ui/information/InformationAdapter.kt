@@ -4,12 +4,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bangkit.scade.data.source.local.entity.InformationEntity
-import com.bangkit.scade.data.source.remote.response.ArticlesResponse
 import com.bangkit.scade.databinding.ItemListInformationBinding
 
 class InformationAdapter : RecyclerView.Adapter<InformationAdapter.ViewHolder>() {
 
     private var listInformation = ArrayList<InformationEntity>()
+    var onItemClick : ((InformationEntity) -> Unit)? = null
 
     fun setInformation(information: List<InformationEntity>?) {
         if (information == null) return
@@ -17,14 +17,21 @@ class InformationAdapter : RecyclerView.Adapter<InformationAdapter.ViewHolder>()
         this.listInformation.addAll(information)
     }
 
-    class ViewHolder(private val binding: ItemListInformationBinding) :
+    inner class ViewHolder(private val binding: ItemListInformationBinding) :
         RecyclerView.ViewHolder(binding.root) {
-            fun bind(information: InformationEntity) {
-                with(binding) {
-                    tvInformationTitle.text = information.title
-                    tvContent.text = information.body
-                }
+        fun bind(information: InformationEntity) {
+            with(binding) {
+                tvInformationTitle.text = information.title
+                tvContent.text = information.body
             }
+        }
+
+        init {
+            binding.root.setOnClickListener {
+                onItemClick?.invoke(listInformation[absoluteAdapterPosition])
+            }
+        }
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

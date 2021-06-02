@@ -60,4 +60,5 @@
     <string name="update_hospital_detail">Update Detail</string>
     <string name="update_hospital">Update Hospital</string>
     <string name="change_language_settings">Change Language Settings</string>
+    <string name="title_article">This is Title</string>
 </resources>
