@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.bangkit.scade.data.source.Repository
 import com.bangkit.scade.data.source.local.entity.InformationEntity
-import com.bangkit.scade.data.source.remote.response.ArticlesResponse
 import com.bangkit.scade.vo.Resource
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.launch
