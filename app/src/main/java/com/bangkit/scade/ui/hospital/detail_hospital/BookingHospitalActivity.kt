@@ -3,12 +3,12 @@ package com.bangkit.scade.ui.hospital.detail_hospital
 import android.content.Intent
 import android.os.Bundle
 import android.provider.Settings
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.bangkit.scade.BuildConfig
 import com.bangkit.scade.R
 import com.bangkit.scade.data.source.local.entity.GetDiagnosesEntity
 import com.bangkit.scade.data.source.local.entity.HospitalEntity
@@ -68,8 +68,8 @@ class BookingHospitalActivity : AppCompatActivity() {
 
                     viewModel.createInvoice(token, invoiceData)
 
-                    viewModel.invoice.observe(this , { result ->
-                        when(result.status) {
+                    viewModel.invoice.observe(this, { result ->
+                        when (result.status) {
                             SUCCESS -> {
                                 alarmReceiver = AlarmReceiver()
                                 alarmReceiver.setOneTimeAlarm(this)
@@ -80,7 +80,11 @@ class BookingHospitalActivity : AppCompatActivity() {
 
                             }
                             ERROR -> {
-                                Toast.makeText(this, getString(R.string.error_message), Toast.LENGTH_SHORT).show()
+                                Toast.makeText(
+                                    this,
+                                    getString(R.string.error_message),
+                                    Toast.LENGTH_SHORT
+                                ).show()
                             }
                         }
                     })
@@ -112,8 +116,8 @@ class BookingHospitalActivity : AppCompatActivity() {
                 viewModel.dataHospital.observe(this, { result ->
                     when (result.status) {
                         SUCCESS -> {
-                        detailHospital = result
-                        populateDataHospital(result)
+                            detailHospital = result
+                            populateDataHospital(result)
                         }
                         LOADING -> {
                         }
@@ -148,7 +152,7 @@ class BookingHospitalActivity : AppCompatActivity() {
     private fun populateDataHospital(data: Resource<HospitalEntity>) {
         with(binding) {
             tvNameHospital.text = (getString(R.string.name_hospital) + " : ${data.data?.name}")
-            tvPhoneHospital.text = (getString(R.string.phone) + " : ${ data.data?.phone}")
+            tvPhoneHospital.text = (getString(R.string.phone) + " : ${data.data?.phone}")
             tvLocationHospital.text =
                 (getString(R.string.location) +
                         " : ${data.data?.address}, ${data.data?.city}, ${data.data?.province}")
@@ -161,7 +165,7 @@ class BookingHospitalActivity : AppCompatActivity() {
             tvContentCancer.text = (getString(R.string.name_cancer) + " : ${data.data?.cancerName}")
 
             Glide.with(this@BookingHospitalActivity)
-                .load("http://35.213.130.133:8080/diagnoses/image/" + data.data?.cancerImage)
+                .load(BuildConfig.base_url_backend + "diagnoses/image/" + data.data?.cancerImage)
                 .apply(RequestOptions())
                 .into(imageCancer)
         }

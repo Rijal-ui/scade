@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.bangkit.scade.BuildConfig
 import com.bangkit.scade.R
 import com.bangkit.scade.data.source.local.entity.InvoicesEntity
 import com.bangkit.scade.databinding.ActivityDetailHistoryBinding
@@ -30,7 +31,7 @@ class DetailHistoryActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayHomeAsUpEnabled(false)
         supportActionBar?.title = getString(R.string.detail_history)
 
         binding = ActivityDetailHistoryBinding.inflate(layoutInflater)
@@ -85,7 +86,7 @@ class DetailHistoryActivity : AppCompatActivity() {
                     " : ${data.data?.hospitalAddress}, ${data.data?.hospitalCity}, ${data.data?.hospitalProvince}")
 
             Glide.with(this@DetailHistoryActivity)
-                .load("http://35.213.130.133:8080/diagnoses/image/" + data.data?.cancerImage)
+                .load(BuildConfig.base_url_backend + "diagnoses/image/" + data.data?.cancerImage)
                 .apply(RequestOptions())
                 .into(imageCancer)
         }

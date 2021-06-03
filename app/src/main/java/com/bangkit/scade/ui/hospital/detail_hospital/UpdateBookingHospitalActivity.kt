@@ -8,6 +8,7 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.bangkit.scade.BuildConfig
 import com.bangkit.scade.R
 import com.bangkit.scade.data.source.local.entity.HospitalEntity
 import com.bangkit.scade.data.source.local.entity.InvoicesEntity
@@ -152,7 +153,7 @@ class UpdateBookingHospitalActivity : AppCompatActivity() {
             tvContentCancer.text = (getString(R.string.name_cancer) + " : ${data.data?.cancerName}")
 
             Glide.with(this@UpdateBookingHospitalActivity)
-                .load("http://35.213.130.133:8080/diagnoses/image/" + data.data?.cancerImage)
+                .load(BuildConfig.base_url_backend + "diagnoses/image/" + data.data?.cancerImage)
                 .apply(RequestOptions())
                 .into(imageCancer)
         }
