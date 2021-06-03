@@ -1,10 +1,10 @@
 package com.bangkit.scade.ui.detailinformation
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.bangkit.scade.R
+import androidx.appcompat.app.AppCompatActivity
 import com.bangkit.scade.data.source.local.entity.InformationEntity
 import com.bangkit.scade.databinding.ActivityDetailInformationBinding
+import com.bumptech.glide.Glide
 
 class DetailInformationActivity : AppCompatActivity() {
 
@@ -29,6 +29,9 @@ class DetailInformationActivity : AppCompatActivity() {
                 tvTitle.text = data.title
                 tvContent.text = data.body
                 //here is the image
+//                Glide.with(this@DetailInformationActivity)
+//                    .load("URL")
+//                    .into(imgInformation)
 
             }
         }

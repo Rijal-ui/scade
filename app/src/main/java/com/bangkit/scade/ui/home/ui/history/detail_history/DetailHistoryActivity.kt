@@ -1,17 +1,14 @@
 package com.bangkit.scade.ui.home.ui.history.detail_history
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.bangkit.scade.R
 import com.bangkit.scade.data.source.local.entity.InvoicesEntity
 import com.bangkit.scade.databinding.ActivityDetailHistoryBinding
-import com.bangkit.scade.ui.hospital.detail_hospital.BookingHospitalViewModel
 import com.bangkit.scade.ui.hospital.update_hospital.HospitalUpdateActivity
 import com.bangkit.scade.ui.hospital.update_hospital.HospitalUpdateActivity.Companion.EXTRA_ID_DIAGNOSE
-import com.bangkit.scade.ui.splash.EndSplashActivity
 import com.bangkit.scade.viewmodel.ViewModelFactory
 import com.bangkit.scade.vo.Resource
 import com.bangkit.scade.vo.Status
@@ -54,7 +51,7 @@ class DetailHistoryActivity : AppCompatActivity() {
                 viewModel.getDataHistory(token, idHistory)
 
                 viewModel.dataHistory.observe(this, { result ->
-                    when(result.status) {
+                    when (result.status) {
                         Status.SUCCESS -> {
                             detailHistory = result
                             populateDataHistory(result)
@@ -81,7 +78,8 @@ class DetailHistoryActivity : AppCompatActivity() {
         with(binding) {
             tvContentCancer.text = (getString(R.string.name_cancer) + " : ${data.data?.cancerName}")
             tvNameSpot.text = (getString(R.string.name_spot) + " : ${data.data?.cancerPosition}")
-            tvNameHospital.text = (getString(R.string.name_hospital) + " : ${data.data?.hospitalName}")
+            tvNameHospital.text =
+                (getString(R.string.name_hospital) + " : ${data.data?.hospitalName}")
             tvPhoneHospital.text = (getString(R.string.phone) + " : ${data.data?.hospitalPhone}")
             tvLocationHospital.text = (getString(R.string.location) +
                     " : ${data.data?.hospitalAddress}, ${data.data?.hospitalCity}, ${data.data?.hospitalProvince}")

@@ -23,8 +23,6 @@ class InformationFragment : Fragment() {
     private var _binding: FragmentInformationBinding? = null
     private lateinit var adapter: InformationAdapter
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreateView(

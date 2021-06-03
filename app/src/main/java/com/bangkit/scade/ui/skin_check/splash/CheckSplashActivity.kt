@@ -1,10 +1,10 @@
 package com.bangkit.scade.ui.skin_check.splash
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import com.bangkit.scade.databinding.ActivityCheckSplashBinding
 import com.bangkit.scade.ui.skin_check.CheckSkinActivity
 

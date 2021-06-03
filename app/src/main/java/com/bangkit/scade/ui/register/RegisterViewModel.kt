@@ -10,12 +10,12 @@ import com.bangkit.scade.vo.Resource
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.launch
 
-class RegisterViewModel(private val repository: Repository): ViewModel() {
+class RegisterViewModel(private val repository: Repository) : ViewModel() {
 
     private var _register = MutableLiveData<Resource<RegisterResponse>>()
     val register = _register
 
-    private val exceptionHandler = CoroutineExceptionHandler{ _, exception ->
+    private val exceptionHandler = CoroutineExceptionHandler { _, exception ->
         _register.postValue(Resource.error("Something went wrong", null))
     }
 

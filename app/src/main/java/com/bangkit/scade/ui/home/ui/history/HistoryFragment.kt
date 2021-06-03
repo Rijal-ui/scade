@@ -10,7 +10,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bangkit.scade.R
 import com.bangkit.scade.databinding.FragmentHistoryBinding
-import com.bangkit.scade.ui.home.ui.information.InformationViewModel
 import com.bangkit.scade.viewmodel.ViewModelFactory
 import com.bangkit.scade.vo.Status
 
@@ -21,9 +20,7 @@ class HistoryFragment : Fragment() {
     private var _binding: FragmentHistoryBinding? = null
     private var token: String = ""
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-        private val binding get() = _binding!!
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -55,7 +52,7 @@ class HistoryFragment : Fragment() {
 
             viewModel.setListHistory(token)
             viewModel.listHistory.observe(viewLifecycleOwner, { list ->
-                when(list.status) {
+                when (list.status) {
                     Status.SUCCESS -> {
                         list.data?.let { adapter.setHistory(list.data) }
                         adapter.setHistory(list.data)
@@ -67,7 +64,11 @@ class HistoryFragment : Fragment() {
                     }
                     Status.ERROR -> {
                         binding.progressBar.visibility = View.GONE
-                        Toast.makeText(activity, getString(R.string.error_message), Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            activity,
+                            getString(R.string.error_message),
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 }
             })

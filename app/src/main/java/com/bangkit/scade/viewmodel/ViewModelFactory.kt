@@ -5,10 +5,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.bangkit.scade.data.source.Repository
 import com.bangkit.scade.di.Injection
-import com.bangkit.scade.ui.detailinformation.DetailInformationViewModel
 import com.bangkit.scade.ui.home.ui.history.HistoryViewModel
 import com.bangkit.scade.ui.home.ui.history.detail_history.DetailHistoryViewModel
-import com.bangkit.scade.ui.home.ui.home.HomeViewModel
 import com.bangkit.scade.ui.home.ui.information.InformationViewModel
 import com.bangkit.scade.ui.hospital.HospitalViewModel
 import com.bangkit.scade.ui.hospital.detail_hospital.BookingHospitalViewModel
@@ -21,22 +19,19 @@ import com.bangkit.scade.ui.splash.MainSplashViewModel
 class ViewModelFactory private constructor(private val repository: Repository) :
     ViewModelProvider.NewInstanceFactory() {
 
-        companion object {
-            @Volatile
-            private var instance: ViewModelFactory? = null
+    companion object {
+        @Volatile
+        private var instance: ViewModelFactory? = null
 
-            fun getInstance(context: Context): ViewModelFactory =
-                instance ?: synchronized(this) {
-                    instance?: ViewModelFactory(Injection.provideRepository(context))
-                }
-        }
+        fun getInstance(context: Context): ViewModelFactory =
+            instance ?: synchronized(this) {
+                instance ?: ViewModelFactory(Injection.provideRepository(context))
+            }
+    }
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         return when {
-            modelClass.isAssignableFrom(HomeViewModel::class.java) -> {
-                HomeViewModel() as T
-            }
             modelClass.isAssignableFrom(CheckSkinViewModel::class.java) -> {
                 CheckSkinViewModel(repository) as T
             }
@@ -67,10 +62,7 @@ class ViewModelFactory private constructor(private val repository: Repository) :
             modelClass.isAssignableFrom(UpdateBookingHospitalViewModel::class.java) -> {
                 UpdateBookingHospitalViewModel(repository) as T
             }
-            modelClass.isAssignableFrom(DetailInformationViewModel::class.java) -> {
-                DetailInformationViewModel(repository) as T
-            }
-            else ->throw Throwable("Unknown ViewModel class: " + modelClass.name)
+            else -> throw Throwable("Unknown ViewModel class: " + modelClass.name)
         }
     }
 

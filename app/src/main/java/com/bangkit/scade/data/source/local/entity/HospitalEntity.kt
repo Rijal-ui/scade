@@ -1,7 +1,6 @@
 package com.bangkit.scade.data.source.local.entity
 
-
-data class HospitalEntity (
+data class HospitalEntity(
     val id: Int? = null,
     val name: String? = null,
     val address: String? = null,

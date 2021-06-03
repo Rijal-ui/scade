@@ -20,23 +20,24 @@ class HistoryAdapter : RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
 
     inner class ViewHolder(private val binding: ItemListHistoryBinding) :
         RecyclerView.ViewHolder(binding.root) {
-            fun bind(history: InvoicesEntity) {
-                with(binding) {
-                    titleSpot.text = history.cancerPosition
-                    resultSpot.text = history.cancerName
+        fun bind(history: InvoicesEntity) {
+            with(binding) {
+                titleSpot.text = history.cancerPosition
+                resultSpot.text = history.cancerName
 
-                    itemView.setOnClickListener {
-                        val intent = Intent(itemView.context, DetailHistoryActivity::class.java).apply {
-                            putExtra(DetailHistoryActivity.EXTRA_ID_HISTORY, history.invoiceId)
-                        }
-                        it.context.startActivity(intent)
+                itemView.setOnClickListener {
+                    val intent = Intent(itemView.context, DetailHistoryActivity::class.java).apply {
+                        putExtra(DetailHistoryActivity.EXTRA_ID_HISTORY, history.invoiceId)
                     }
+                    it.context.startActivity(intent)
                 }
             }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val itemListHistory = ItemListHistoryBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val itemListHistory =
+            ItemListHistoryBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(itemListHistory)
     }
 
