@@ -12,13 +12,9 @@ import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.launch
 
 class MainSplashViewModel(val repository: Repository) : ViewModel() {
-    private var _dataSession = MutableLiveData<Resource<DataEntity>>()
-    val dataSession = _dataSession
-
     private var _session = MutableLiveData<Resource<SessionResponse>>()
     val session = _session
 
-    //exception handler
     private val exceptionHandler = CoroutineExceptionHandler { _, exception ->
         _session.postValue(Resource.error("Something went wrong", null))
     }

@@ -2,7 +2,7 @@ package com.bangkit.scade.data.source.remote.response
 
 import com.google.gson.annotations.SerializedName
 
-data class DataHospital (
+data class DataHospital(
 
     @field:SerializedName("ID")
     val id: Int? = null,

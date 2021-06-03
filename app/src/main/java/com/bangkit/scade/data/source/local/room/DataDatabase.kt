@@ -9,7 +9,7 @@ import com.bangkit.scade.data.source.local.entity.DataEntity
 @Database(entities = [DataEntity::class], version = 1, exportSchema = false)
 abstract class DataDatabase : RoomDatabase() {
 
-    abstract fun dataDao() : DataDao
+    abstract fun dataDao(): DataDao
 
     companion object {
 

@@ -19,26 +19,29 @@ class HospitalAdapter : RecyclerView.Adapter<HospitalAdapter.ViewHolder>() {
         this.listHospital.addAll(hospital)
     }
 
-    inner class ViewHolder (private val binding: ItemListHospitalBinding) :
-        RecyclerView.ViewHolder(binding.root){
-            fun bind(hospital: HospitalEntity) {
-                with(binding) {
-                    tvHospitalTitle.text = hospital.name
-                    tvHospitalLocation.text = ("${hospital.address}, ${hospital.city}, ${hospital.province}")
+    inner class ViewHolder(private val binding: ItemListHospitalBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(hospital: HospitalEntity) {
+            with(binding) {
+                tvHospitalTitle.text = hospital.name
+                tvHospitalLocation.text =
+                    ("${hospital.address}, ${hospital.city}, ${hospital.province}")
 
-                    itemView.setOnClickListener {
-                        val intent = Intent(itemView.context, BookingHospitalActivity::class.java).apply {
+                itemView.setOnClickListener {
+                    val intent =
+                        Intent(itemView.context, BookingHospitalActivity::class.java).apply {
                             putExtra(BookingHospitalActivity.EXTRA_ID_HOSPITAL, hospital.id)
                             putExtra(BookingHospitalActivity.EXTRA_ID_DIAGNOSE, idDiagnose)
                         }
-                        it.context.startActivity(intent)
-                    }
+                    it.context.startActivity(intent)
                 }
             }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val itemListHospital = ItemListHospitalBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val itemListHospital =
+            ItemListHospitalBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(itemListHospital)
     }
 

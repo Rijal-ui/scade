@@ -93,7 +93,7 @@ class RemoteDataSource constructor(
         token: String,
         updateData: UpdateHospitalRequest,
         id: Int
-    ) : UpdateHospitalResponse {
+    ): UpdateHospitalResponse {
         return apiBackendService.updateHispitalInvoice(token, updateData, id)
     }
 }

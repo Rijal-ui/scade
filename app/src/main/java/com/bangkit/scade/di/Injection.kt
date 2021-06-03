@@ -5,10 +5,10 @@ import com.bangkit.scade.data.source.Repository
 import com.bangkit.scade.data.source.local.LocalDataSource
 import com.bangkit.scade.data.source.local.room.DataDatabase
 import com.bangkit.scade.data.source.remote.RemoteDataSource
-import com.bangkit.scade.service.retrofit.MLApiConfig
+import com.bangkit.scade.service.ApiBackendInterface
 import com.bangkit.scade.service.ApiMLInterface
 import com.bangkit.scade.service.retrofit.BackendApiConfig
-import com.bangkit.scade.service.ApiBackendInterface
+import com.bangkit.scade.service.retrofit.MLApiConfig
 import com.bangkit.scade.utils.AppExecutors
 
 object Injection {
@@ -21,5 +21,4 @@ object Injection {
         val appExecutor = AppExecutors()
         return Repository.getInstance(remoteDataSourceML, localDataSource, appExecutor)
     }
-
 }
