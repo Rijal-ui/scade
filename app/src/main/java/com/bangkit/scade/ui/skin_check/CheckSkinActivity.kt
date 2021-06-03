@@ -1,6 +1,8 @@
+
 package com.bangkit.scade.ui.skin_check
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -36,7 +38,7 @@ import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 
-
+@Suppress("DEPRECATION")
 class CheckSkinActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityCheckSkinBinding
@@ -63,16 +65,16 @@ class CheckSkinActivity : AppCompatActivity() {
                         result.data?.let {
                             viewModel.createDiagnoses(
                                 session.tokenSession,
-                                result.data.data[0],
+                                result.data.data.capitalizeWords(),
                                 file,
-                                binding.edtSpot.text.toString().trim()
+                                binding.edtSpot.text.toString().trim().capitalizeWords()
                             )
                             viewModel.idDiagonse.observe(this, { diagnoses ->
                                 when (diagnoses.status) {
                                     SUCCESS -> {
                                         idDiagnoses = diagnoses.data?.data
                                         result.data.let {
-                                            binding.tvCheckResult.text = result.data.data[0]
+                                            binding.tvCheckResult.text = result.data.data.capitalizeWords()
                                             binding.progressBar.visibility = View.GONE
                                             binding.tvCheckResult.visibility = View.VISIBLE
                                             binding.btnBooking.visibility = View.VISIBLE
@@ -118,17 +120,13 @@ class CheckSkinActivity : AppCompatActivity() {
         }
 
         binding.btnBooking.setOnClickListener {
-            //ngirim data variabel yg disimpan tadi lewat intent
             val intent = Intent(this, HospitalActivity::class.java)
             intent.putExtra(EXTRA_ID_DIAGNOSE, idDiagnoses)
             startActivity(intent)
         }
 
         binding.btnCheckSkin.setOnClickListener {
-            //check apakah edit text nya udah diisi atau belum
-            //jika sudah jalankan fungsi on click
-            //jika belum kasih toast harap diisi
-            if (!binding.edtSpot.text.isEmpty()) {
+            if (binding.edtSpot.text.isNotEmpty()) {
                 try {
                     if (file.exists()) {
                         viewModel.checkSkinCancer(file)
@@ -194,6 +192,7 @@ class CheckSkinActivity : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("QueryPermissionsNeeded")
     private fun dispatchTakePictureIntent() {
         Intent(
             MediaStore.ACTION_IMAGE_CAPTURE
@@ -220,6 +219,7 @@ class CheckSkinActivity : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("SimpleDateFormat")
     private fun createImageFile(): File? {
         val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
         val storageDir: File? = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
@@ -265,4 +265,6 @@ class CheckSkinActivity : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
+
+    fun String.capitalizeWords(): String = split(" ").map { it.capitalize() }.joinToString(" ")
 }

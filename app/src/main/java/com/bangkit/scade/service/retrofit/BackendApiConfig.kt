@@ -1,5 +1,6 @@
 package com.bangkit.scade.service.retrofit
 
+import com.bangkit.scade.BuildConfig
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -17,7 +18,7 @@ class BackendApiConfig {
                 .build()
             return retrofit ?: synchronized(this) {
                 retrofit ?: Retrofit.Builder()
-                    .baseUrl("http://35.213.130.133:8080/")
+                    .baseUrl(BuildConfig.base_url_backend)
                     .addConverterFactory(GsonConverterFactory.create())
                     .client(client)
                     .build()

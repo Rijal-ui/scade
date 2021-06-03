@@ -30,7 +30,7 @@ class AlarmReceiver : BroadcastReceiver() {
         val intent = Intent(context, AlarmReceiver::class.java)
 
         val currentTime = Calendar.getInstance().timeInMillis
-        val targetTime = currentTime.plus(10000)
+        val targetTime = currentTime.plus(604800000)
 
         val pendingIntent = PendingIntent.getBroadcast(context, ID_ONETIME, intent, 0)
         alarmManager.set(AlarmManager.RTC_WAKEUP, targetTime, pendingIntent)
