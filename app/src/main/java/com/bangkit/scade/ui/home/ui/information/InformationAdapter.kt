@@ -3,13 +3,15 @@ package com.bangkit.scade.ui.home.ui.information
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bangkit.scade.BuildConfig
 import com.bangkit.scade.data.source.local.entity.InformationEntity
 import com.bangkit.scade.databinding.ItemListInformationBinding
+import com.bumptech.glide.Glide
 
 class InformationAdapter : RecyclerView.Adapter<InformationAdapter.ViewHolder>() {
 
     private var listInformation = ArrayList<InformationEntity>()
-    var onItemClick : ((InformationEntity) -> Unit)? = null
+    var onItemClick: ((InformationEntity) -> Unit)? = null
 
     fun setInformation(information: List<InformationEntity>?) {
         if (information == null) return
@@ -23,6 +25,9 @@ class InformationAdapter : RecyclerView.Adapter<InformationAdapter.ViewHolder>()
             with(binding) {
                 tvInformationTitle.text = information.title
                 tvContent.text = information.body
+                Glide.with(itemView.context)
+                    .load(BuildConfig.base_url_backend + "articles/image/" + information.thumbnail)
+                    .into(imgArticle)
             }
         }
 
