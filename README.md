@@ -57,6 +57,10 @@ There are some library that we use to build our application
 * RxBinding (2.0.0)
 
   binding APIs for Android UI widgets from the platform and support libraries
+  
+## Architecture
+
+Our project application implements Android Architecture Components Pattern which is recommended by google and as a part of Android Jetpack. Library that can build strong application, can be easily tested, and can be managed easily.
 
 ## How to use our Apps
 
