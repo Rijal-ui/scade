@@ -60,7 +60,9 @@ There are some library that we use to build our application
   
 ## Architecture
 
-Our project application implements Android Architecture Components Pattern which is recommended by google and as a part of Android Jetpack. Library that can build strong application, can be easily tested, and can be managed easily.
+Our project application implements Android Architecture Components Pattern which is recommended by google and as a part of Android Jetpack. Library that can build strong application, can be easily tested, and can be managed easily. For illutration, you can see bellow
+
+![logo](https://github.com/dimasbjg/scade/blob/master/assets/SCADE_diagram.png)
 
 ## How to use our Apps
 
